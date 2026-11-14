@@ -1,22 +1,23 @@
 import { Link, useParams } from 'react-router-dom';
 import {
   ArrowLeft,
-  Award,
   Bookmark,
-  Calendar,
-  CheckCircle2,
+  ExternalLink,
+  Info,
+  Landmark,
   MapPin,
   MessageSquare,
-  Mic,
   Send,
+  Users,
+  Vote,
 } from 'lucide-react';
-import { HANSARD_ENTRIES, MEMBERS } from '../data/parliamentData';
+import { DAPIL_BY_NAME, MEMBERS_580 } from '../data/referenceData';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { useWatchlist } from '../utils/watchlist';
 
 export function MemberDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const member = MEMBERS.find((m) => m.id === id);
+  const member = MEMBERS_580.find((m) => m.id === id);
   const { isMemberWatched, toggleMember } = useWatchlist();
 
   if (!member) {
@@ -36,8 +37,11 @@ export function MemberDetailPage() {
     );
   }
 
-  const memberQuotes = HANSARD_ENTRIES.filter((h) => h.speaker === member.name);
   const watched = isMemberWatched(member.id);
+  const dapilInfo = DAPIL_BY_NAME.get(member.dapil.toLowerCase());
+  const sameDapilMembers = MEMBERS_580.filter(
+    (m) => m.dapil.toLowerCase() === member.dapil.toLowerCase() && m.id !== member.id,
+  );
 
   return (
     <div>
@@ -65,6 +69,9 @@ export function MemberDetailPage() {
                 >
                   {member.faction}
                 </span>
+                <span className="rounded-full bg-[#EFECE4] px-3 py-1 font-mono-num text-xs font-bold text-[#14171F]">
+                  No. Anggota #{member.seatNo}
+                </span>
                 <button
                   type="button"
                   onClick={() => toggleMember(member.id)}
@@ -79,41 +86,52 @@ export function MemberDetailPage() {
                   {watched ? 'Dipantau di Beranda' : 'Pantau Anggota'}
                 </button>
               </div>
+
               <h1 className="mt-4 font-editorial text-3xl sm:text-5xl font-bold text-[#14171F] leading-[1.12]">
                 {member.name}
               </h1>
-              <p className="mt-2 text-sm sm:text-base font-medium text-[#5A6472]">{member.role}</p>
+              <p className="mt-2 text-sm sm:text-base font-medium text-[#5A6472]">
+                Anggota DPR RI Periode 2024-2029
+              </p>
 
               <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#5A6472]">
-                <span className="inline-flex items-center gap-1.5 font-semibold text-[#14171F]">
+                <Link
+                  to={`/anggota?dapil=${encodeURIComponent(member.dapil)}`}
+                  className="inline-flex items-center gap-1.5 font-semibold text-[#14171F] hover:text-[#7A1822]"
+                >
                   <MapPin className="h-3.5 w-3.5 text-[#7A1822]" />
-                  {member.dapil}
-                </span>
-                <span className="text-[#5A6472]/50">•</span>
-                {member.akd.map((item) => (
-                  <Link
-                    key={item}
-                    to="/akd"
-                    className="font-bold text-[#7A1822] hover:underline"
-                  >
-                    {item}
-                  </Link>
-                ))}
+                  Dapil {member.dapil}
+                </Link>
+                {member.komisi && (
+                  <>
+                    <span className="text-[#5A6472]/50">•</span>
+                    <Link
+                      to={`/akd?q=${encodeURIComponent(member.komisi)}`}
+                      className="font-bold text-[#7A1822] hover:underline"
+                    >
+                      {member.komisi}
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-5 glass-surface px-6 py-5 shrink-0 text-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 glass-surface px-6 py-5 shrink-0 text-center">
               <div>
-                <div className="font-mono-num text-2xl sm:text-3xl font-bold text-[#0F5132]">{member.attendanceRate}%</div>
-                <div className="mt-1 text-[11px] font-medium text-[#5A6472]">Kehadiran</div>
+                <div className="font-mono-num text-xl sm:text-2xl font-bold text-[#14171F]">#{member.seatNo}</div>
+                <div className="mt-1 text-[11px] font-medium text-[#5A6472]">No. Anggota</div>
               </div>
               <div>
-                <div className="font-mono-num text-2xl sm:text-3xl font-bold text-[#14171F]">{member.billsSponsored}</div>
-                <div className="mt-1 text-[11px] font-medium text-[#5A6472]">RUU Dikawal</div>
+                <div className="font-mono-num text-xl sm:text-2xl font-bold text-[#0F5132]">
+                  {member.votes ?? '-'}
+                </div>
+                <div className="mt-1 text-[11px] font-medium text-[#5A6472]">Suara Sah Pemilu</div>
               </div>
-              <div>
-                <div className="font-mono-num text-2xl sm:text-3xl font-bold text-[#7A1822]">{member.interventionsCount}</div>
-                <div className="mt-1 text-[11px] font-medium text-[#5A6472]">Pendapat Rapat</div>
+              <div className="col-span-2 sm:col-span-1">
+                <div className="font-mono-num text-xl sm:text-2xl font-bold text-[#7A1822]">
+                  {member.komisi ?? '-'}
+                </div>
+                <div className="mt-1 text-[11px] font-medium text-[#5A6472]">Penugasan Komisi</div>
               </div>
             </div>
           </div>
@@ -122,64 +140,74 @@ export function MemberDetailPage() {
 
       {/* Main Content */}
       <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10 grid grid-cols-1 gap-10 lg:grid-cols-12">
-        <div className="lg:col-span-8 space-y-8">
-          <div className="elevated-surface p-7 sm:p-9">
-            <h2 className="font-editorial text-2xl sm:text-3xl font-bold text-[#14171F]">Profil & Fokus Kebijakan</h2>
-            <p className="mt-4 text-sm sm:text-base text-[#14171F]/85 leading-[1.75]">{member.bio}</p>
-          </div>
-
-          <div className="elevated-surface p-7 sm:p-9">
-            <div className="flex items-center gap-2.5">
-              <Calendar className="h-5 w-5 text-[#7A1822]" />
-              <h2 className="font-editorial text-2xl sm:text-3xl font-bold text-[#14171F]">
-                Aktivitas Parlemen Terbaru
-              </h2>
+        <div className="lg:col-span-8 space-y-8 min-w-0">
+          {member.note && (
+            <div className="elevated-surface p-7 sm:p-8">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#7A1822]">
+                <Info className="h-4 w-4" />
+                Catatan Jabatan / Pergantian
+              </div>
+              <p className="mt-3 text-sm sm:text-base text-[#14171F] leading-[1.75]">{member.note}</p>
             </div>
-            <div className="mt-6 divide-y divide-[#14171F]/8">
-              {member.recentActivities.map((act) => (
-                <div
-                  key={`${act.date}-${act.title}`}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-5 first:pt-2 last:pb-0"
-                >
-                  <div>
-                    <div className="flex items-center gap-2.5 text-xs">
-                      <span className="font-bold text-[#7A1822]">{act.type}</span>
-                      <span className="text-[#5A6472]/50">•</span>
-                      <span className="font-mono-num font-medium text-[#5A6472]">{act.date}</span>
-                    </div>
-                    <p className="mt-1.5 text-sm sm:text-base font-semibold text-[#14171F] leading-[1.6]">{act.title}</p>
-                  </div>
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-[#0F5132] hidden sm:block" />
+          )}
+
+          {dapilInfo && (
+            <div className="elevated-surface p-7 sm:p-9">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2.5">
+                  <MapPin className="h-5 w-5 text-[#7A1822]" />
+                  <h2 className="font-editorial text-2xl sm:text-3xl font-bold text-[#14171F]">
+                    Cakupan Wilayah Dapil {dapilInfo.name}
+                  </h2>
                 </div>
-              ))}
+                <span className="rounded-full bg-[#7A1822]/12 px-3 py-1 font-mono-num text-xs font-bold text-[#7A1822]">
+                  {dapilInfo.seats} Kursi DPR RI
+                </span>
+              </div>
+              <p className="mt-2 text-xs font-semibold text-[#5A6472]">
+                Provinsi {dapilInfo.province} • Wilayah {dapilInfo.islandGroup}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {dapilInfo.regions.map((reg) => (
+                  <span
+                    key={reg}
+                    className="rounded-xl bg-[#FAF8F4] px-3 py-1.5 text-xs font-medium text-[#14171F]"
+                  >
+                    {reg}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
-          {memberQuotes.length > 0 && (
+          {sameDapilMembers.length > 0 && (
             <div className="elevated-surface p-7 sm:p-9">
               <div className="flex items-center gap-2.5">
-                <Mic className="h-5 w-5 text-[#7A1822]" />
+                <Users className="h-5 w-5 text-[#7A1822]" />
                 <h2 className="font-editorial text-2xl sm:text-3xl font-bold text-[#14171F]">
-                  Kutipan Pernyataan di Rapat (Risalah)
+                  Wakil Lain di Dapil {member.dapil} ({sameDapilMembers.length})
                 </h2>
               </div>
-              <div className="mt-7 space-y-7">
-                {memberQuotes.map((q) => (
-                  <blockquote key={q.id} className="border-l-3 border-[#7A1822] pl-5 py-1">
-                    <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-[#5A6472]">
-                      <span className="font-bold text-[#14171F]">{q.sessionTitle}</span>
-                      <span className="font-mono-num">{q.date}</span>
-                    </div>
-                    <div className="mt-1.5 text-xs font-bold text-[#7A1822]">Topik: {q.topic}</div>
-                    <p className="mt-3 font-editorial text-base sm:text-lg italic text-[#14171F] leading-[1.75]">
-                      {q.excerpt}
-                    </p>
-                    {q.decisionTag && (
-                      <div className="mt-3.5 inline-block rounded-full bg-emerald-500/12 px-3 py-1 text-[11px] font-bold text-[#0F5132]">
-                        {q.decisionTag}
+              <div className="mt-6 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+                {sameDapilMembers.map((peer) => (
+                  <Link
+                    key={peer.id}
+                    to={`/anggota/${peer.id}`}
+                    className="rounded-2xl bg-[#FAF8F4] p-4 hover:bg-white hover:shadow-sm transition-all flex items-center justify-between gap-3"
+                  >
+                    <div className="min-w-0">
+                      <div className="text-sm font-bold text-[#14171F] truncate">{peer.name}</div>
+                      <div className="mt-0.5 text-xs text-[#5A6472] truncate">
+                        {peer.komisi ?? 'DPR RI'} • #{peer.seatNo}
                       </div>
-                    )}
-                  </blockquote>
+                    </div>
+                    <span
+                      className="shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-bold text-white"
+                      style={{ backgroundColor: peer.factionColor }}
+                    >
+                      {peer.factionShort}
+                    </span>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -187,7 +215,7 @@ export function MemberDetailPage() {
         </div>
 
         {/* Sidebar */}
-        <aside className="lg:col-span-4 space-y-8">
+        <aside className="lg:col-span-4 space-y-8 min-w-0">
           <div className="velvet-surface relative overflow-hidden p-7 sm:p-8 text-white">
             <div className="pointer-events-none absolute -top-16 -right-16 h-44 w-44 rounded-full bg-[#C28E0E]/20 blur-3xl" />
             <div className="relative">
@@ -211,21 +239,45 @@ export function MemberDetailPage() {
             </div>
           </div>
 
-          <div className="elevated-surface p-7">
+          <div className="elevated-surface p-7 space-y-4">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5A6472]">
-              <Award className="h-4 w-4 text-[#7A1822]" />
-              Penugasan AKD
+              <Landmark className="h-4 w-4 text-[#7A1822]" />
+              Penugasan & Data Resmi
             </div>
-            <ul className="mt-5 divide-y divide-[#14171F]/8 text-sm">
-              {member.akd.map((item) => (
-                <li key={item} className="flex items-center justify-between py-3.5 first:pt-1 last:pb-1">
-                  <span className="font-bold text-[#14171F]">{item}</span>
-                  <Link to="/akd" className="text-xs font-bold text-[#7A1822] hover:underline">
-                    Lihat →
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {member.komisi ? (
+              <div className="flex items-center justify-between py-2 border-b border-[#14171F]/8 text-sm">
+                <span className="font-bold text-[#14171F]">{member.komisi}</span>
+                <Link
+                  to={`/akd?q=${encodeURIComponent(member.komisi)}`}
+                  className="text-xs font-bold text-[#7A1822] hover:underline"
+                >
+                  Lihat AKD →
+                </Link>
+              </div>
+            ) : (
+              <p className="text-xs text-[#5A6472]">Penugasan komisi belum tercantum pada sumber data tabel.</p>
+            )}
+            {member.votes && (
+              <div className="flex items-center justify-between py-2 border-b border-[#14171F]/8 text-xs">
+                <span className="inline-flex items-center gap-1.5 text-[#5A6472]">
+                  <Vote className="h-3.5 w-3.5 text-[#0F5132]" />
+                  Perolehan Suara Pemilu 2024
+                </span>
+                <strong className="font-mono-num text-[#14171F]">{member.votes}</strong>
+              </div>
+            )}
+            <p className="text-xs text-[#5A6472] leading-relaxed">
+              Rekam kehadiran rapat dan riwayat lengkap masing-masing anggota tersedia pada situs resmi DPR RI.
+            </p>
+            <a
+              href="https://www.dpr.go.id/anggota"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#7A1822] hover:underline"
+            >
+              Buka Direktori Resmi dpr.go.id
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
           </div>
         </aside>
       </section>

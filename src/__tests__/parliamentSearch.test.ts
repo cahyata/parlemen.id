@@ -30,5 +30,8 @@ describe('searchParliament', () => {
 
     const prolegnas = searchParliament('Penyiaran');
     expect(prolegnas.some((r) => r.category === 'RUU & UU' && r.title.includes('Penyiaran'))).toBe(true);
+
+    const member = searchParliament('Puan Maharani');
+    expect(member.some((r) => r.category === 'Anggota' && r.title.includes('Puan Maharani'))).toBe(true);
   });
 });

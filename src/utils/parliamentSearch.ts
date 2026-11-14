@@ -2,12 +2,13 @@ import {
   AKD_LIST,
   BILLS,
   HANSARD_ENTRIES,
-  MEMBERS,
   TODAY_SESSIONS,
 } from '../data/parliamentData';
 import {
+  DAPIL_BY_NAME,
   DAPIL_LIST,
   FRAKSI_LIST,
+  MEMBERS_580,
   PROLEGNAS_PRIORITAS,
 } from '../data/referenceData';
 
@@ -498,7 +499,8 @@ function buildSearchIndex(): IndexedItem[] {
         bodyLower: `${p.title} ${p.proposer} ${p.committee}`.toLowerCase(),
       };
     }),
-    ...MEMBERS.map((member) => {
+    ...MEMBERS_580.map((member) => {
+      const dapilInfo = DAPIL_BY_NAME.get(member.dapil.toLowerCase());
       const aliases = [
         'anggota dpr',
         'wakil rakyat',
@@ -507,19 +509,21 @@ function buildSearchIndex(): IndexedItem[] {
         'fraksi',
         'partai',
         member.faction,
-        ...member.akd,
+        member.factionShort,
+        ...(member.komisi ? [member.komisi] : []),
+        ...(dapilInfo ? [dapilInfo.province, ...dapilInfo.keywords] : []),
       ];
       return {
         id: `member-${member.id}`,
         category: 'Anggota' as const,
         title: member.name,
-        subtitle: `${member.faction} • ${member.dapil}`,
+        subtitle: `${member.factionShort} • Dapil ${member.dapil}${member.komisi ? ` • ${member.komisi}` : ''}`,
         to: `/anggota/${member.id}`,
         aliases,
         aliasesLower: aliases.map((a) => a.toLowerCase()),
         titleLower: member.name.toLowerCase(),
-        subtitleLower: `${member.faction} ${member.dapil}`.toLowerCase(),
-        bodyLower: `${member.role} ${member.bio} ${member.akd.join(' ')}`.toLowerCase(),
+        subtitleLower: `${member.faction} ${member.factionShort} ${member.dapil} ${member.komisi ?? ''}`.toLowerCase(),
+        bodyLower: `${member.note ?? ''} ${dapilInfo?.regions.join(' ') ?? ''}`.toLowerCase(),
       };
     }),
     ...DAPIL_LIST.map((d) => {

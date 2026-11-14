@@ -11,6 +11,7 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           icons: ['lucide-react'],
+          'members-data': ['./src/data/members580.json'],
         },
       },
     },

@@ -1,15 +1,32 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { MapPin, Search, Users, Award, ArrowRight, X, Bookmark, Send } from 'lucide-react';
-import { MEMBERS } from '../data/parliamentData';
-import { DAPIL_LIST, FRAKSI_LIST, findMatchingDapils } from '../data/referenceData';
+import {
+  ArrowRight,
+  Bookmark,
+  ChevronLeft,
+  ChevronRight,
+  Landmark,
+  MapPin,
+  Search,
+  Send,
+  Users,
+  Vote,
+  X,
+} from 'lucide-react';
+import {
+  DAPIL_LIST,
+  FRAKSI_LIST,
+  MEMBERS_580,
+  findMatchingDapils,
+} from '../data/referenceData';
 import { PageHeader } from '../components/PageHeader';
 import { useWatchlist } from '../utils/watchlist';
 
 const QUICK_REGIONS = ['Bandung', 'Jakarta', 'Surabaya', 'Medan', 'Bali', 'Makassar', 'Yogyakarta', 'Solo'];
+const PAGE_SIZE = 24;
 
 function getInitials(name: string) {
-  const clean = name.replace(/^(Dr\.|Ir\.|H\.|dr\.|Ni Luh)\s+/gi, '');
+  const clean = name.replace(/^(Dr\.|Drs\.|Dra\.|Ir\.|H\.|Hj\.|dr\.|KH\.|K\.H\.|Prof\.|Tgk\.|Ni Luh|R\.A\.|R\.)\s+/gi, '');
   const parts = clean.split(' ').filter(Boolean);
   return ((parts[0]?.[0] ?? 'A') + (parts[1]?.[0] ?? 'D')).toUpperCase();
 }
@@ -21,8 +38,9 @@ export function AnggotaPage() {
 
   const [query, setQuery] = useState(initialDapil);
   const [selectedFaction, setSelectedFaction] = useState(initialFraksi || 'Semua');
-  const [selectedAkd, setSelectedAkd] = useState('Semua');
+  const [selectedKomisi, setSelectedKomisi] = useState('Semua');
   const [onlyWatched, setOnlyWatched] = useState(false);
+  const [page, setPage] = useState(1);
 
   const { memberIds, isMemberWatched, toggleMember } = useWatchlist();
 
@@ -31,10 +49,27 @@ export function AnggotaPage() {
     [],
   );
 
-  const akds = useMemo(
-    () => ['Semua', ...Array.from(new Set(MEMBERS.flatMap((m) => m.akd)))],
-    [],
-  );
+  const komisiOptions = useMemo(() => {
+    const romanMap = new Map<string, number>([
+      ['Komisi I', 1],
+      ['Komisi II', 2],
+      ['Komisi III', 3],
+      ['Komisi IV', 4],
+      ['Komisi V', 5],
+      ['Komisi VI', 6],
+      ['Komisi VII', 7],
+      ['Komisi VIII', 8],
+      ['Komisi IX', 9],
+      ['Komisi X', 10],
+      ['Komisi XI', 11],
+      ['Komisi XII', 12],
+      ['Komisi XIII', 13],
+    ]);
+    const unique = Array.from(
+      new Set(MEMBERS_580.map((m) => m.komisi).filter((k): k is string => Boolean(k))),
+    ).sort((a, b) => (romanMap.get(a) ?? 99) - (romanMap.get(b) ?? 99));
+    return ['Semua', ...unique];
+  }, []);
 
   const matchingDapils = useMemo(() => {
     const q = query.trim();
@@ -45,24 +80,36 @@ export function AnggotaPage() {
   const filteredMembers = useMemo(() => {
     const q = query.trim().toLowerCase();
     const matchedDapilNames = new Set(matchingDapils.map((d) => d.name.toLowerCase()));
-    return MEMBERS.filter((m) => {
+    return MEMBERS_580.filter((m) => {
       if (onlyWatched && !memberIds.includes(m.id)) return false;
       if (selectedFaction !== 'Semua' && m.factionShort !== selectedFaction) return false;
-      if (selectedAkd !== 'Semua' && !m.akd.includes(selectedAkd)) return false;
+      if (selectedKomisi !== 'Semua' && m.komisi !== selectedKomisi) return false;
       if (q) {
-        const hay = `${m.name} ${m.dapil} ${m.faction} ${m.factionShort} ${m.regionKeywords.join(' ')} ${m.akd.join(' ')}`.toLowerCase();
+        const hay = `${m.name} ${m.dapil} ${m.faction} ${m.factionShort} ${m.komisi ?? ''} ${m.note ?? ''} #${m.seatNo}`.toLowerCase();
         const inMatchedDapil = matchedDapilNames.has(m.dapil.toLowerCase());
         return hay.includes(q) || inMatchedDapil;
       }
       return true;
     });
-  }, [query, selectedFaction, selectedAkd, onlyWatched, memberIds, matchingDapils]);
+  }, [query, selectedFaction, selectedKomisi, onlyWatched, memberIds, matchingDapils]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [query, selectedFaction, selectedKomisi, onlyWatched]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredMembers.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pagedMembers = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return filteredMembers.slice(start, start + PAGE_SIZE);
+  }, [filteredMembers, currentPage]);
 
   const resetFilters = () => {
     setQuery('');
     setSelectedFaction('Semua');
-    setSelectedAkd('Semua');
+    setSelectedKomisi('Semua');
     setOnlyWatched(false);
+    setPage(1);
     setSearchParams({});
   };
 
@@ -72,7 +119,7 @@ export function AnggotaPage() {
         breadcrumbs={[{ label: 'Anggota & Dapil' }]}
         eyebrow={`Sistem Perwakilan (${DAPIL_LIST.length} Dapil Nasional)`}
         title="Cari Wakil Rakyat & Daerah Pemilihan"
-        description="Temukan daerah pemilihan (84 Dapil resmi), alokasi kursi, 8 fraksi DPR RI, serta profil anggota beserta tingkat kehadiran dan aktivitas sidangnya."
+        description={`Telusuri seluruh ${MEMBERS_580.length} Anggota DPR RI periode 2024-2029 berdasarkan nama, kota/kabupaten, daerah pemilihan (84 Dapil resmi), 8 fraksi, atau penugasan komisi.`}
         aside={
           <div className="glass-surface p-4 flex items-center gap-4">
             <img
@@ -81,7 +128,7 @@ export function AnggotaPage() {
               className="h-20 w-auto object-contain"
             />
             <div className="text-left">
-              <div className="font-mono-num text-xl font-bold text-[#7A1822]">580 Kursi</div>
+              <div className="font-mono-num text-xl font-bold text-[#7A1822]">{MEMBERS_580.length} Kursi</div>
               <div className="text-[11px] font-bold text-[#14171F]">{FRAKSI_LIST.length} Fraksi • {DAPIL_LIST.length} Dapil</div>
               <div className="text-[10px] text-[#5A6472]">Periode 2024-2029</div>
             </div>
@@ -96,7 +143,7 @@ export function AnggotaPage() {
             <div className="lg:col-span-6">
               <label htmlFor="dapil-search" className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#7A1822]">
                 <MapPin className="h-4 w-4" />
-                Cari Kota, Kabupaten, Dapil, atau Nama Anggota
+                Cari Nama Anggota, Kota/Kabupaten, atau Dapil
               </label>
               <div className="relative mt-2">
                 <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#7A1822]" />
@@ -105,7 +152,7 @@ export function AnggotaPage() {
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Contoh: Bandung, Jember, Sorong, Lombok, Jakarta Selatan..."
+                  placeholder="Contoh: Bandung, Jember, Sorong, Puan Maharani, atau Komisi III..."
                   className="w-full rounded-xl bg-white/95 py-2.5 pl-10 pr-3 text-sm text-[#14171F] shadow-[inset_0_1px_3px_rgba(20,23,31,0.06)] focus:outline-none"
                 />
               </div>
@@ -131,17 +178,17 @@ export function AnggotaPage() {
 
             <div className="lg:col-span-3">
               <label htmlFor="akd-filter" className="block text-xs font-bold uppercase tracking-wider text-[#5A6472]">
-                Alat Kelengkapan Dewan
+                Komisi DPR RI
               </label>
               <select
                 id="akd-filter"
-                value={selectedAkd}
-                onChange={(e) => setSelectedAkd(e.target.value)}
+                value={selectedKomisi}
+                onChange={(e) => setSelectedKomisi(e.target.value)}
                 className="mt-2 w-full rounded-xl bg-white/95 px-3.5 py-2.5 text-sm font-medium text-[#14171F] shadow-[inset_0_1px_3px_rgba(20,23,31,0.06)] focus:outline-none"
               >
-                {akds.map((a) => (
-                  <option key={a} value={a}>
-                    {a === 'Semua' ? 'Semua Komisi & Badan' : a}
+                {komisiOptions.map((k) => (
+                  <option key={k} value={k}>
+                    {k === 'Semua' ? 'Semua Komisi (I - XIII)' : k}
                   </option>
                 ))}
               </select>
@@ -211,7 +258,7 @@ export function AnggotaPage() {
               )}
             </div>
 
-            {(query || selectedFaction !== 'Semua' || selectedAkd !== 'Semua' || onlyWatched) && (
+            {(query || selectedFaction !== 'Semua' || selectedKomisi !== 'Semua' || onlyWatched) && (
               <button
                 type="button"
                 onClick={resetFilters}
@@ -270,84 +317,91 @@ export function AnggotaPage() {
           </div>
         )}
 
-        <div className="mt-6 flex items-center justify-between text-xs text-[#5A6472]">
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-2 text-xs text-[#5A6472]">
           <span>
-            Menampilkan <strong className="font-mono-num text-[#14171F]">{filteredMembers.length}</strong> profil anggota representatif dari 8 fraksi DPR RI
+            Menampilkan{' '}
+            <strong className="font-mono-num text-[#14171F]">
+              {filteredMembers.length === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1}
+              {'-'}
+              {Math.min(currentPage * PAGE_SIZE, filteredMembers.length)}
+            </strong>{' '}
+            dari <strong className="font-mono-num text-[#14171F]">{filteredMembers.length}</strong> anggota DPR RI 2024-2029
           </span>
+          {totalPages > 1 && (
+            <span className="font-mono-num">
+              Halaman {currentPage} / {totalPages}
+            </span>
+          )}
         </div>
 
         {filteredMembers.length === 0 ? (
           <div className="mt-6 elevated-surface p-12 text-center">
             <Users className="mx-auto h-9 w-9 text-[#5A6472]" />
             <h3 className="mt-3 font-editorial text-xl font-bold text-[#14171F]">
-              {matchingDapils.length > 0
-                ? 'Info Dapil Ditemukan, Sampel Profil Anggota Belum Tersedia'
-                : 'Tidak ditemukan wakil rakyat yang cocok'}
+              Tidak ditemukan anggota DPR RI yang cocok
             </h3>
             <p className="mt-1 text-sm text-[#5A6472] max-w-xl mx-auto">
-              {matchingDapils.length > 0
-                ? `Cakupan wilayah dan alokasi kursi untuk ${matchingDapils[0].name} sudah tampil di atas. Pada prototipe ini, sampel profil anggota tersedia untuk dapil Jakarta, Jawa Barat, Jawa Tengah, Jawa Timur, Sumatera Utara, dan Bali.`
-                : 'Coba masukkan nama provinsi atau kota utama (misalnya Bandung, Surabaya, Bali, atau Yogyakarta).'}
+              Coba ubah kata kunci pencarian, fraksi, atau pilihan komisi.
             </p>
             <button
               type="button"
               onClick={resetFilters}
               className="mt-5 rounded-xl bg-gradient-to-r from-[#8D1D29] to-[#5B1219] px-5 py-2.5 text-xs font-bold text-white shadow-md cursor-pointer"
             >
-              Tampilkan Semua Anggota
+              Tampilkan Semua {MEMBERS_580.length} Anggota
             </button>
           </div>
         ) : (
-          <div className="mt-7 grid grid-cols-1 gap-8 md:grid-cols-2">
-            {filteredMembers.map((member) => {
-              const watched = isMemberWatched(member.id);
-              return (
-                <article
-                  key={member.id}
-                  className="elevated-surface-interactive relative overflow-hidden flex flex-col justify-between"
-                >
-                  <div
-                    className="pointer-events-none absolute -top-16 -right-12 h-36 w-36 rounded-full opacity-12 blur-2xl"
-                    style={{ backgroundColor: member.factionColor }}
-                  />
+          <>
+            <div className="mt-7 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {pagedMembers.map((member) => {
+                const watched = isMemberWatched(member.id);
+                return (
+                  <article
+                    key={member.id}
+                    className="elevated-surface-interactive relative overflow-hidden flex flex-col justify-between"
+                  >
+                    <div
+                      className="pointer-events-none absolute -top-16 -right-12 h-32 w-32 rounded-full opacity-12 blur-2xl"
+                      style={{ backgroundColor: member.factionColor }}
+                    />
 
-                  <div className="relative p-7 sm:p-8">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex items-start gap-4 min-w-0">
-                        <div
-                          className="flex h-13 w-13 shrink-0 items-center justify-center rounded-2xl font-editorial text-lg font-bold text-white shadow-lg"
-                          style={{
-                            background: `linear-gradient(135deg, ${member.factionColor}, #14171F)`,
-                          }}
-                        >
-                          {getInitials(member.name)}
-                        </div>
-                        <div className="min-w-0">
-                          <span
-                            className="inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white"
-                            style={{ backgroundColor: member.factionColor }}
+                    <div className="relative p-6">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex items-start gap-3.5 min-w-0">
+                          <div
+                            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl font-editorial text-base font-bold text-white shadow-md"
+                            style={{
+                              background: `linear-gradient(135deg, ${member.factionColor}, #14171F)`,
+                            }}
                           >
-                            {member.faction}
-                          </span>
-                          <h2 className="mt-2 font-editorial text-xl sm:text-2xl font-bold text-[#14171F] leading-snug">
-                            <Link to={`/anggota/${member.id}`} className="hover:text-[#7A1822]">
-                              {member.name}
-                            </Link>
-                          </h2>
-                          <p className="mt-1 text-xs font-medium text-[#5A6472]">{member.role}</p>
+                            {getInitials(member.name)}
+                          </div>
+                          <div className="min-w-0">
+                            <div className="flex flex-wrap items-center gap-1.5">
+                              <span
+                                className="inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white"
+                                style={{ backgroundColor: member.factionColor }}
+                              >
+                                {member.factionShort}
+                              </span>
+                              <span className="font-mono-num text-[11px] font-semibold text-[#5A6472]">
+                                #{member.seatNo}
+                              </span>
+                            </div>
+                            <h2 className="mt-2 font-editorial text-lg sm:text-xl font-bold text-[#14171F] leading-snug">
+                              <Link to={`/anggota/${member.id}`} className="hover:text-[#7A1822]">
+                                {member.name}
+                              </Link>
+                            </h2>
+                          </div>
                         </div>
-                      </div>
 
-                      <div className="flex flex-col items-end gap-2 shrink-0">
-                        <div className="rounded-2xl bg-emerald-500/12 px-3 py-2 text-center">
-                          <div className="font-mono-num text-sm font-bold text-[#0F5132]">{member.attendanceRate}%</div>
-                          <div className="text-[10px] font-semibold text-emerald-800">Hadir</div>
-                        </div>
                         <button
                           type="button"
                           onClick={() => toggleMember(member.id)}
                           aria-pressed={watched}
-                          className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-bold transition-all cursor-pointer ${
+                          className={`shrink-0 inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-bold transition-all cursor-pointer ${
                             watched
                               ? 'bg-[#7A1822] text-white shadow-2xs'
                               : 'bg-[#F4F1EA] text-[#14171F] hover:bg-[#7A1822]/10 hover:text-[#7A1822]'
@@ -357,46 +411,85 @@ export function AnggotaPage() {
                           {watched ? 'Dipantau' : 'Pantau'}
                         </button>
                       </div>
-                    </div>
 
-                    <div className="mt-5 flex items-start gap-2 text-xs text-[#5A6472]">
-                      <MapPin className="h-4 w-4 shrink-0 text-[#7A1822] mt-0.5" />
-                      <div>
-                        <span className="font-bold text-[#14171F]">Wilayah (Dapil): </span>
-                        <span>{member.dapil}</span>
+                      <div className="mt-4 space-y-1.5 text-xs text-[#5A6472]">
+                        <div className="flex items-start gap-2">
+                          <MapPin className="h-3.5 w-3.5 shrink-0 text-[#7A1822] mt-0.5" />
+                          <span>
+                            <strong className="text-[#14171F]">Dapil:</strong> {member.dapil}
+                          </span>
+                        </div>
+                        {member.komisi && (
+                          <div className="flex items-start gap-2">
+                            <Landmark className="h-3.5 w-3.5 shrink-0 text-[#7A1822] mt-0.5" />
+                            <span>
+                              <strong className="text-[#14171F]">Tugas:</strong> {member.komisi}
+                            </span>
+                          </div>
+                        )}
+                        {member.votes && (
+                          <div className="flex items-start gap-2">
+                            <Vote className="h-3.5 w-3.5 shrink-0 text-[#0F5132] mt-0.5" />
+                            <span className="font-mono-num">
+                              <strong className="font-sans text-[#14171F]">Suara sah:</strong> {member.votes}
+                            </span>
+                          </div>
+                        )}
                       </div>
+
+                      {member.note && (
+                        <p className="mt-3 rounded-xl bg-[#FAF8F4] px-3 py-2 text-[11px] text-[#5A6472] line-clamp-2 leading-relaxed">
+                          {member.note}
+                        </p>
+                      )}
                     </div>
 
-                    <p className="mt-4 text-sm text-[#5A6472] leading-[1.75] line-clamp-2">
-                      {member.bio}
-                    </p>
-
-                    <div className="mt-4 text-xs font-semibold text-[#333B48]">
-                      Tugas: {member.akd.join(' • ')}
+                    <div className="px-6 py-3.5 border-t border-[#14171F]/6 flex items-center justify-between text-xs">
+                      <span className="text-[#5A6472] truncate pr-2">{member.faction}</span>
+                      <Link
+                        to={`/anggota/${member.id}`}
+                        className="shrink-0 inline-flex items-center gap-1 font-bold text-[#7A1822] hover:underline"
+                      >
+                        Detail <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
                     </div>
-                  </div>
+                  </article>
+                );
+              })}
+            </div>
 
-                  <div className="px-7 sm:px-8 py-4 border-t border-[#14171F]/6 flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-4 text-[#5A6472]">
-                      <span className="inline-flex items-center gap-1">
-                        <Award className="h-3.5 w-3.5 text-[#7A1822]" />
-                        <strong className="font-mono-num text-[#14171F]">{member.billsSponsored}</strong> RUU
-                      </span>
-                      <span>
-                        <strong className="font-mono-num text-[#14171F]">{member.interventionsCount}</strong> pendapat rapat
-                      </span>
-                    </div>
-                    <Link
-                      to={`/anggota/${member.id}`}
-                      className="inline-flex items-center gap-1 font-bold text-[#7A1822] hover:underline"
-                    >
-                      Profil & Catatan Rapat <ArrowRight className="h-3.5 w-3.5" />
-                    </Link>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+            {totalPages > 1 && (
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+                <button
+                  type="button"
+                  disabled={currentPage <= 1}
+                  onClick={() => {
+                    setPage((p) => Math.max(1, p - 1));
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-xs font-bold text-[#14171F] shadow-2xs disabled:opacity-40 hover:bg-[#FAF8F4] cursor-pointer disabled:cursor-not-allowed"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  Sebelumnya
+                </button>
+                <span className="font-mono-num text-xs font-bold text-[#5A6472] px-2">
+                  Halaman {currentPage} dari {totalPages}
+                </span>
+                <button
+                  type="button"
+                  disabled={currentPage >= totalPages}
+                  onClick={() => {
+                    setPage((p) => Math.min(totalPages, p + 1));
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-xs font-bold text-[#14171F] shadow-2xs disabled:opacity-40 hover:bg-[#FAF8F4] cursor-pointer disabled:cursor-not-allowed"
+                >
+                  Berikutnya
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+            )}
+          </>
         )}
       </section>
     </div>

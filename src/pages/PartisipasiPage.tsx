@@ -20,10 +20,10 @@ import {
   AKD_LIST,
   BILLS,
   INITIAL_ASPIRATION_TICKETS,
-  MEMBERS,
   type AspirationTicket,
   type Bill,
 } from '../data/parliamentData';
+import { MEMBERS_580, findMatchingDapils } from '../data/referenceData';
 import { PageHeader } from '../components/PageHeader';
 
 const STORAGE_KEY = 'parlemen_id_aspirations_v1';
@@ -150,11 +150,10 @@ export function PartisipasiPage() {
   const matchedDapilMembers = useMemo(() => {
     const q = dapil.trim().toLowerCase();
     if (q.length < 3) return [];
-    return MEMBERS.filter(
-      (m) =>
-        m.dapil.toLowerCase().includes(q) ||
-        m.regionKeywords.some((kw) => kw.toLowerCase().includes(q)),
-    ).slice(0, 3);
+    const matchedDapils = new Set(findMatchingDapils(q).map((d) => d.name.toLowerCase()));
+    return MEMBERS_580.filter(
+      (m) => m.dapil.toLowerCase().includes(q) || matchedDapils.has(m.dapil.toLowerCase()),
+    ).slice(0, 4);
   }, [dapil]);
 
   const draftMessage = useMemo(

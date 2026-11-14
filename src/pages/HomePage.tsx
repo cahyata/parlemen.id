@@ -17,8 +17,8 @@ import {
   Bookmark,
   X,
 } from 'lucide-react';
-import { AKD_LIST, BILLS, HANSARD_ENTRIES, LEGISLATIVE_STAGES, MEMBERS, TODAY_SESSIONS } from '../data/parliamentData';
-import { DAPIL_LIST, FRAKSI_LIST } from '../data/referenceData';
+import { AKD_LIST, BILLS, HANSARD_ENTRIES, LEGISLATIVE_STAGES, TODAY_SESSIONS } from '../data/parliamentData';
+import { DAPIL_LIST, FRAKSI_LIST, MEMBERS_580 } from '../data/referenceData';
 import { BillStageStepper } from '../components/BillStageStepper';
 import { useWatchlist } from '../utils/watchlist';
 
@@ -34,7 +34,7 @@ export function HomePage() {
   );
 
   const watchedMembers = useMemo(
-    () => memberIds.map((id) => MEMBERS.find((m) => m.id === id)).filter((m): m is NonNullable<typeof m> => Boolean(m)),
+    () => memberIds.map((id) => MEMBERS_580.find((m) => m.id === id)).filter((m): m is NonNullable<typeof m> => Boolean(m)),
     [memberIds],
   );
 
@@ -347,9 +347,7 @@ export function HomePage() {
                 );
               })}
 
-              {watchedMembers.map((member) => {
-                const latestAct = member.recentActivities[0];
-                return (
+              {watchedMembers.map((member) => (
                   <div
                     key={member.id}
                     className="rounded-2xl bg-[#FAF8F4] p-5 flex flex-col justify-between gap-3"
@@ -357,7 +355,7 @@ export function HomePage() {
                     <div className="min-w-0">
                       <div className="flex items-center justify-between gap-2 text-[11px]">
                         <span className="font-bold text-[#1D4ED8]">
-                          Anggota • {member.factionShort}
+                          Anggota #{member.seatNo} • {member.factionShort}
                         </span>
                         <button
                           type="button"
@@ -374,25 +372,27 @@ export function HomePage() {
                       >
                         {member.name}
                       </Link>
-                      <div className="mt-0.5 text-[11px] font-medium text-[#5A6472]">{member.dapil}</div>
-                      {latestAct && (
+                      <div className="mt-0.5 text-[11px] font-medium text-[#5A6472]">
+                        Dapil {member.dapil}
+                        {member.komisi ? ` • ${member.komisi}` : ''}
+                      </div>
+                      {member.note && (
                         <p className="mt-2 text-xs text-[#5A6472] line-clamp-2 leading-relaxed">
-                          <strong className="text-[#14171F]">{latestAct.date}:</strong> {latestAct.title}
+                          {member.note}
                         </p>
                       )}
                     </div>
 
                     <div className="pt-2.5 border-t border-[#14171F]/6 flex items-center justify-between text-[11px]">
                       <span className="font-mono-num font-bold text-[#0F5132]">
-                        Kehadiran {member.attendanceRate}%
+                        {member.votes ? `Suara ${member.votes}` : member.faction}
                       </span>
                       <Link to={`/anggota/${member.id}`} className="font-bold text-[#7A1822] hover:underline">
                         Profil →
                       </Link>
                     </div>
                   </div>
-                );
-              })}
+              ))}
             </div>
           </div>
         )}
@@ -600,10 +600,10 @@ export function HomePage() {
 
                 <div className="mt-7 pt-6 border-t border-white/10">
                   <div className="text-[11px] font-bold uppercase tracking-widest text-[#FDE68A]">
-                    Sampel Anggota DPR RI
+                    Anggota DPR RI ({MEMBERS_580.length} Kursi)
                   </div>
                   <div className="mt-3.5 space-y-3">
-                    {MEMBERS.slice(0, 3).map((m) => (
+                    {MEMBERS_580.slice(0, 3).map((m) => (
                       <Link
                         key={m.id}
                         to={`/anggota/${m.id}`}
