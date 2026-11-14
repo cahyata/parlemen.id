@@ -14,7 +14,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/95 p-1.5 shadow-lg">
                 <img
-                  src="/assets/dpr-logo.svg"
+                  src={`${import.meta.env.BASE_URL}assets/dpr-logo.svg`}
                   alt="Lambang DPR RI"
                   className="h-full w-full object-contain"
                 />

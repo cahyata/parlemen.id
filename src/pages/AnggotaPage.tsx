@@ -60,7 +60,7 @@ export function AnggotaPage() {
         aside={
           <div className="glass-surface p-4 flex items-center gap-4">
             <img
-              src="/assets/dpr-seats-2024-2029.svg"
+              src={`${import.meta.env.BASE_URL}assets/dpr-seats-2024-2029.svg`}
               alt="Diagram Komposisi 580 Kursi DPR RI 2024–2029"
               className="h-20 w-auto object-contain"
             />

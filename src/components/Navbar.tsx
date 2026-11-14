@@ -84,7 +84,7 @@ export function Navbar() {
         <Link to="/" className="flex shrink-0 items-center gap-3 group">
           <div className="relative flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-[#FAF8F4] to-[#EFECE4] p-1.5 shadow-[0_6px_16px_-4px_rgba(122,24,34,0.22),inset_0_1px_0_rgba(255,255,255,0.9)] group-hover:scale-105 transition-transform">
             <img
-              src="/assets/dpr-logo.svg"
+              src={`${import.meta.env.BASE_URL}assets/dpr-logo.svg`}
               alt="Lambang DPR RI"
               className="h-full w-full object-contain"
             />

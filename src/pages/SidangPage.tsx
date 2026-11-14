@@ -173,7 +173,7 @@ export function SidangPage() {
             <div className="mt-5 grid grid-cols-1 gap-6 lg:grid-cols-12">
               <div className="lg:col-span-7 relative overflow-hidden rounded-2xl bg-black/55 backdrop-blur-xl p-6 sm:p-7 flex flex-col justify-between min-h-[250px] shadow-2xl">
                 <img
-                  src="/assets/dpr-paripurna.webp"
+                  src={`${import.meta.env.BASE_URL}assets/dpr-paripurna.webp`}
                   alt="Suasana Rapat Paripurna DPR RI"
                   width={1400}
                   height={787}

@@ -111,7 +111,7 @@ export function HomePage() {
 
                 <div className="relative h-44 w-full overflow-hidden">
                   <img
-                    src="/assets/dpr-building.webp"
+                    src={`${import.meta.env.BASE_URL}assets/dpr-building.webp`}
                     alt="Kompleks Parlemen Republik Indonesia di Senayan, Jakarta"
                     width={1067}
                     height={592}
