@@ -1,0 +1,82 @@
+[
+  {
+    "id": "f-pdip",
+    "code": "F-PDIP",
+    "shortName": "PDI-P",
+    "name": "Fraksi Partai Demokrasi Indonesia Perjuangan",
+    "seats": 110,
+    "sharePct": 18.97,
+    "color": "#991B1B",
+    "keywords": ["pdip", "pdi perjuangan", "banteng", "puan"]
+  },
+  {
+    "id": "f-golkar",
+    "code": "F-Golkar",
+    "shortName": "Golkar",
+    "name": "Fraksi Partai Golongan Karya",
+    "seats": 102,
+    "sharePct": 17.59,
+    "color": "#CA8A04",
+    "keywords": ["golkar", "beringin", "partai golkar"]
+  },
+  {
+    "id": "f-gerindra",
+    "code": "F-Gerindra",
+    "shortName": "Gerindra",
+    "name": "Fraksi Partai Gerakan Indonesia Raya",
+    "seats": 86,
+    "sharePct": 14.83,
+    "color": "#B91C1C",
+    "keywords": ["gerindra", "partai gerindra"]
+  },
+  {
+    "id": "f-nasdem",
+    "code": "F-NasDem",
+    "shortName": "NasDem",
+    "name": "Fraksi Partai NasDem",
+    "seats": 69,
+    "sharePct": 11.9,
+    "color": "#1D4ED8",
+    "keywords": ["nasdem", "partai nasdem"]
+  },
+  {
+    "id": "f-pkb",
+    "code": "F-PKB",
+    "shortName": "PKB",
+    "name": "Fraksi Partai Kebangkitan Bangsa",
+    "seats": 68,
+    "sharePct": 11.72,
+    "color": "#15803D",
+    "keywords": ["pkb", "kebangkitan bangsa"]
+  },
+  {
+    "id": "f-pks",
+    "code": "F-PKS",
+    "shortName": "PKS",
+    "name": "Fraksi Partai Keadilan Sejahtera",
+    "seats": 53,
+    "sharePct": 9.14,
+    "color": "#EA580C",
+    "keywords": ["pks", "keadilan sejahtera"]
+  },
+  {
+    "id": "f-pan",
+    "code": "F-PAN",
+    "shortName": "PAN",
+    "name": "Fraksi Partai Amanat Nasional",
+    "seats": 48,
+    "sharePct": 8.28,
+    "color": "#0284C7",
+    "keywords": ["pan", "amanat nasional"]
+  },
+  {
+    "id": "f-demokrat",
+    "code": "F-Demokrat",
+    "shortName": "Demokrat",
+    "name": "Fraksi Partai Demokrat",
+    "seats": 44,
+    "sharePct": 7.59,
+    "color": "#2563EB",
+    "keywords": ["demokrat", "partai demokrat"]
+  }
+]

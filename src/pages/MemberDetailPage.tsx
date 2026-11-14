@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import {
   ArrowLeft,
   Award,
+  Bookmark,
   Calendar,
   CheckCircle2,
   MapPin,
@@ -11,10 +12,12 @@ import {
 } from 'lucide-react';
 import { HANSARD_ENTRIES, MEMBERS } from '../data/parliamentData';
 import { Breadcrumb } from '../components/Breadcrumb';
+import { useWatchlist } from '../utils/watchlist';
 
 export function MemberDetailPage() {
   const { id } = useParams<{ id: string }>();
   const member = MEMBERS.find((m) => m.id === id);
+  const { isMemberWatched, toggleMember } = useWatchlist();
 
   if (!member) {
     return (
@@ -34,6 +37,7 @@ export function MemberDetailPage() {
   }
 
   const memberQuotes = HANSARD_ENTRIES.filter((h) => h.speaker === member.name);
+  const watched = isMemberWatched(member.id);
 
   return (
     <div>
@@ -54,12 +58,27 @@ export function MemberDetailPage() {
 
           <div className="mt-7 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-3xl">
-              <span
-                className="inline-block rounded-full px-3 py-1 text-xs font-bold text-white shadow-sm"
-                style={{ backgroundColor: member.factionColor }}
-              >
-                {member.faction}
-              </span>
+              <div className="flex flex-wrap items-center gap-3">
+                <span
+                  className="inline-block rounded-full px-3 py-1 text-xs font-bold text-white shadow-sm"
+                  style={{ backgroundColor: member.factionColor }}
+                >
+                  {member.faction}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => toggleMember(member.id)}
+                  aria-pressed={watched}
+                  className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-bold transition-all cursor-pointer ${
+                    watched
+                      ? 'bg-[#7A1822] text-white shadow-sm'
+                      : 'bg-white/90 text-[#14171F] shadow-2xs hover:bg-white hover:text-[#7A1822]'
+                  }`}
+                >
+                  <Bookmark className={`h-3.5 w-3.5 ${watched ? 'fill-current' : ''}`} />
+                  {watched ? 'Dipantau di Beranda' : 'Pantau Anggota'}
+                </button>
+              </div>
               <h1 className="mt-4 font-editorial text-3xl sm:text-5xl font-bold text-[#14171F] leading-[1.12]">
                 {member.name}
               </h1>

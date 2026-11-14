@@ -57,7 +57,7 @@ export function Footer() {
               Perwakilan & Suara Warga
             </h3>
             <ul className="mt-4 space-y-2.5 text-sm text-gray-300">
-              <li><Link to="/anggota" className="hover:text-white transition-colors">Cari Wakil per Wilayah (80 Dapil)</Link></li>
+              <li><Link to="/anggota" className="hover:text-white transition-colors">Cari Wakil per Wilayah (84 Dapil)</Link></li>
               <li><Link to="/partisipasi" className="hover:text-white transition-colors">Beri Masukan RUU (RDPU)</Link></li>
               <li><Link to="/partisipasi" className="hover:text-white transition-colors">Kirim Pengaduan & Aspirasi (BAM)</Link></li>
               <li><Link to="/akd" className="hover:text-white transition-colors">Kementerian Mitra Komisi</Link></li>

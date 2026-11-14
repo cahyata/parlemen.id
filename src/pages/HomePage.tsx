@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useMemo, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Search,
@@ -14,14 +14,29 @@ import {
   Radio,
   Mic,
   Clock,
+  Bookmark,
+  X,
 } from 'lucide-react';
-import { AKD_LIST, BILLS, HANSARD_ENTRIES, MEMBERS, TODAY_SESSIONS } from '../data/parliamentData';
+import { AKD_LIST, BILLS, HANSARD_ENTRIES, LEGISLATIVE_STAGES, MEMBERS, TODAY_SESSIONS } from '../data/parliamentData';
+import { DAPIL_LIST, FRAKSI_LIST } from '../data/referenceData';
 import { BillStageStepper } from '../components/BillStageStepper';
+import { useWatchlist } from '../utils/watchlist';
 
 export function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [dapilQuery, setDapilQuery] = useState('');
   const navigate = useNavigate();
+  const { billIds, memberIds, totalCount, toggleBill, toggleMember } = useWatchlist();
+
+  const watchedBills = useMemo(
+    () => billIds.map((id) => BILLS.find((b) => b.id === id)).filter((b): b is NonNullable<typeof b> => Boolean(b)),
+    [billIds],
+  );
+
+  const watchedMembers = useMemo(
+    () => memberIds.map((id) => MEMBERS.find((m) => m.id === id)).filter((m): m is NonNullable<typeof m> => Boolean(m)),
+    [memberIds],
+  );
 
   const handleGlobalSearch = (e: FormEvent) => {
     e.preventDefault();
@@ -142,13 +157,13 @@ export function HomePage() {
                     </div>
                     <div className="glass-dark rounded-2xl p-4">
                       <div className="font-mono-num text-2xl sm:text-3xl font-bold text-emerald-300">
-                        8
+                        {FRAKSI_LIST.length}
                       </div>
                       <div className="mt-1 text-xs text-white/80">Fraksi DPR RI</div>
                     </div>
                     <div className="glass-dark rounded-2xl p-4">
                       <div className="font-mono-num text-2xl sm:text-3xl font-bold text-white">
-                        80
+                        {DAPIL_LIST.length}
                       </div>
                       <div className="mt-1 text-xs text-white/80">Wilayah (Dapil)</div>
                     </div>
@@ -224,6 +239,163 @@ export function HomePage() {
             </Link>
           ))}
         </div>
+      </section>
+
+      {/* 2B. Pantauan Saya (Bookmark RUU & Anggota di Browser) */}
+      <section className="mx-auto max-w-7xl px-5 pt-4 pb-6 sm:px-8 lg:px-10">
+        {totalCount === 0 ? (
+          <div className="glass-surface p-6 sm:p-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-start gap-3.5 min-w-0">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#7A1822]/10 text-[#7A1822]">
+                <Bookmark className="h-5 w-5" />
+              </div>
+              <div className="min-w-0">
+                <h2 className="font-sans text-sm sm:text-base font-bold text-[#14171F]">
+                  Pantau RUU & Wakil Rakyat Favorit
+                </h2>
+                <p className="mt-1 text-xs sm:text-sm text-[#5A6472] leading-relaxed">
+                  Tandai RUU atau anggota DPR pilihan Anda (tersimpan di browser) untuk melihat ringkasan progres terbarunya langsung di Beranda.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              <button
+                type="button"
+                onClick={() => toggleBill(BILLS[0].id)}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-white px-3.5 py-2 text-xs font-bold text-[#7A1822] shadow-2xs hover:bg-[#7A1822] hover:text-white transition-colors cursor-pointer"
+              >
+                <Bookmark className="h-3.5 w-3.5" />
+                + {BILLS[0].shortTitle}
+              </button>
+              <Link
+                to="/legislasi"
+                className="inline-flex items-center gap-1 rounded-xl bg-[#EFECE4] px-3.5 py-2 text-xs font-bold text-[#14171F] hover:bg-white transition-colors"
+              >
+                Pilih RUU <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="elevated-surface p-6 sm:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5">
+                <Bookmark className="h-5 w-5 text-[#7A1822] fill-current" />
+                <div>
+                  <h2 className="font-editorial text-2xl font-bold text-[#14171F]">
+                    Pantauan Saya
+                  </h2>
+                  <p className="text-xs text-[#5A6472]">
+                    Ringkasan progres terbaru dari {watchedBills.length} RUU dan {watchedMembers.length} anggota yang Anda simpan.
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-3 text-xs font-bold text-[#7A1822]">
+                <Link to="/legislasi" className="hover:underline">Kelola RUU</Link>
+                <span className="text-[#5A6472]/40">•</span>
+                <Link to="/anggota" className="hover:underline">Kelola Anggota</Link>
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {watchedBills.map((bill) => {
+                const latestTimeline = bill.timeline[0];
+                const dimPct = bill.dimProgress
+                  ? Math.round((bill.dimProgress.agreed / bill.dimProgress.total) * 100)
+                  : null;
+
+                return (
+                  <div
+                    key={bill.id}
+                    className="rounded-2xl bg-[#FAF8F4] p-5 flex flex-col justify-between gap-3"
+                  >
+                    <div className="min-w-0">
+                      <div className="flex items-center justify-between gap-2 text-[11px]">
+                        <span className="font-bold text-[#7A1822]">
+                          RUU • Tahap {bill.stage + 1}/5 ({LEGISLATIVE_STAGES[bill.stage].short})
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => toggleBill(bill.id)}
+                          aria-label={`Hapus pantauan ${bill.shortTitle}`}
+                          className="rounded-md p-1 text-[#5A6472] hover:bg-black/5 hover:text-[#7A1822] cursor-pointer"
+                        >
+                          <X className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+                      <Link
+                        to={`/legislasi/${bill.id}`}
+                        className="mt-1.5 block font-editorial text-lg font-bold text-[#14171F] hover:text-[#7A1822] leading-snug"
+                      >
+                        {bill.shortTitle}
+                      </Link>
+                      {latestTimeline && (
+                        <p className="mt-2 text-xs text-[#5A6472] line-clamp-2 leading-relaxed">
+                          <strong className="text-[#14171F]">{latestTimeline.date}:</strong> {latestTimeline.event}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="pt-2.5 border-t border-[#14171F]/6 flex items-center justify-between text-[11px]">
+                      <span className="font-semibold text-[#0F5132]">
+                        {dimPct !== null ? `DIM Disepakati ${dimPct}%` : bill.stageStatus}
+                      </span>
+                      <Link to={`/legislasi/${bill.id}`} className="font-bold text-[#7A1822] hover:underline">
+                        Detail →
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {watchedMembers.map((member) => {
+                const latestAct = member.recentActivities[0];
+                return (
+                  <div
+                    key={member.id}
+                    className="rounded-2xl bg-[#FAF8F4] p-5 flex flex-col justify-between gap-3"
+                  >
+                    <div className="min-w-0">
+                      <div className="flex items-center justify-between gap-2 text-[11px]">
+                        <span className="font-bold text-[#1D4ED8]">
+                          Anggota • {member.factionShort}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => toggleMember(member.id)}
+                          aria-label={`Hapus pantauan ${member.name}`}
+                          className="rounded-md p-1 text-[#5A6472] hover:bg-black/5 hover:text-[#7A1822] cursor-pointer"
+                        >
+                          <X className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+                      <Link
+                        to={`/anggota/${member.id}`}
+                        className="mt-1.5 block font-editorial text-lg font-bold text-[#14171F] hover:text-[#7A1822] leading-snug"
+                      >
+                        {member.name}
+                      </Link>
+                      <div className="mt-0.5 text-[11px] font-medium text-[#5A6472]">{member.dapil}</div>
+                      {latestAct && (
+                        <p className="mt-2 text-xs text-[#5A6472] line-clamp-2 leading-relaxed">
+                          <strong className="text-[#14171F]">{latestAct.date}:</strong> {latestAct.title}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="pt-2.5 border-t border-[#14171F]/6 flex items-center justify-between text-[11px]">
+                      <span className="font-mono-num font-bold text-[#0F5132]">
+                        Kehadiran {member.attendanceRate}%
+                      </span>
+                      <Link to={`/anggota/${member.id}`} className="font-bold text-[#7A1822] hover:underline">
+                        Profil →
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* 3. Hari Ini di Kompleks Parlemen Senayan */}
@@ -387,7 +559,7 @@ export function HomePage() {
               <div className="relative">
                 <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#FDE68A]">
                   <MapPin className="h-3.5 w-3.5" />
-                  Cari Wilayah • 80 Dapil
+                  Cari Wilayah • {DAPIL_LIST.length} Dapil
                 </div>
 
                 <h2 className="mt-3 font-editorial text-2xl sm:text-3xl font-bold text-white leading-tight">

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
   ArrowLeft,
+  Bookmark,
   Calendar,
   CheckCircle2,
   Clock,
@@ -15,11 +16,13 @@ import {
 import { BILLS, LEGISLATIVE_STAGES } from '../data/parliamentData';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { BillStageStepper } from '../components/BillStageStepper';
+import { useWatchlist } from '../utils/watchlist';
 
 export function BillDetailPage() {
   const { id } = useParams<{ id: string }>();
   const bill = BILLS.find((b) => b.id === id);
   const [downloadedDoc, setDownloadedDoc] = useState<string | null>(null);
+  const { isBillWatched, toggleBill } = useWatchlist();
 
   if (!bill) {
     return (
@@ -42,6 +45,7 @@ export function BillDetailPage() {
   const dimPct = bill.dimProgress
     ? Math.round((bill.dimProgress.agreed / bill.dimProgress.total) * 100)
     : null;
+  const watched = isBillWatched(bill.id);
 
   return (
     <div>
@@ -58,15 +62,31 @@ export function BillDetailPage() {
             ]}
           />
 
-          <div className="mt-6 flex flex-wrap items-center gap-3 text-xs">
-            <span className="rounded-full bg-[#7A1822]/10 px-3 py-1 font-bold text-[#7A1822]">
-              {bill.category}
-            </span>
-            <span className="font-semibold text-[#5A6472]">{bill.proposer}</span>
-            <span className="text-[#5A6472]/50">•</span>
-            <span className="rounded-full bg-emerald-500/12 px-3 py-1 font-bold text-[#0F5132]">
-              {bill.stageStatus}
-            </span>
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-3 text-xs">
+              <span className="rounded-full bg-[#7A1822]/10 px-3 py-1 font-bold text-[#7A1822]">
+                {bill.category}
+              </span>
+              <span className="font-semibold text-[#5A6472]">{bill.proposer}</span>
+              <span className="text-[#5A6472]/50">•</span>
+              <span className="rounded-full bg-emerald-500/12 px-3 py-1 font-bold text-[#0F5132]">
+                {bill.stageStatus}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => toggleBill(bill.id)}
+              aria-pressed={watched}
+              className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all cursor-pointer ${
+                watched
+                  ? 'bg-[#7A1822] text-white shadow-[0_10px_24px_-6px_rgba(122,24,34,0.45)]'
+                  : 'bg-white/90 text-[#14171F] shadow-sm hover:bg-white hover:text-[#7A1822]'
+              }`}
+            >
+              <Bookmark className={`h-3.5 w-3.5 ${watched ? 'fill-current' : ''}`} />
+              {watched ? 'Sedang Dipantau di Beranda' : 'Pantau RUU Ini'}
+            </button>
           </div>
 
           <h1 className="mt-4 font-editorial text-3xl sm:text-5xl font-bold text-[#14171F] leading-[1.12] max-w-4xl">

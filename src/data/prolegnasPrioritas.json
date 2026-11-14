@@ -1,0 +1,188 @@
+[
+  {
+    "id": "ruu-perampasan-aset",
+    "billId": "ruu-perampasan-aset",
+    "shortTitle": "RUU Perampasan Aset",
+    "title": "RUU tentang Perampasan Aset Tindak Pidana",
+    "proposer": "Inisiatif Pemerintah",
+    "committee": "Komisi III & Baleg",
+    "statusSummary": "Pembicaraan Tingkat I (Terbuka Masukan Publik)",
+    "keywords": ["korupsi", "sita aset", "tppu", "pencucian uang", "harta haram", "kpk"]
+  },
+  {
+    "id": "ruu-perlindungan-pekerja-rumah-tangga",
+    "billId": "ruu-perlindungan-pekerja-rumah-tangga",
+    "shortTitle": "RUU PPRT",
+    "title": "RUU tentang Pelindungan Pekerja Rumah Tangga (PPRT)",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Baleg",
+    "statusSummary": "Disetujui Paripurna (Tingkat II)",
+    "keywords": ["prt", "art", "pembantu", "pekerja domestik", "upah", "kontrak kerja"]
+  },
+  {
+    "id": "ruu-kedaulatan-data-ai",
+    "billId": "ruu-kedaulatan-data-ai",
+    "shortTitle": "RUU Tata Kelola AI",
+    "title": "RUU tentang Tata Kelola Kecerdasan Artifisial & Kedaulatan Data",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Komisi I",
+    "statusSummary": "Penyusunan & Konsultasi Publik",
+    "keywords": ["ai", "kecerdasan buatan", "algoritma", "privasi", "hak cipta", "komdigi"]
+  },
+  {
+    "id": "ruu-apbn-2027",
+    "billId": "ruu-apbn-2027",
+    "shortTitle": "RUU APBN 2027",
+    "title": "RUU tentang Anggaran Pendapatan dan Belanja Negara TA 2027",
+    "proposer": "Inisiatif Pemerintah",
+    "committee": "Banggar",
+    "statusSummary": "Diundangkan",
+    "keywords": ["anggaran negara", "belanja negara", "pajak", "subsidi", "bansos", "bbm"]
+  },
+  {
+    "id": "ruu-masyarakat-hukum-adat",
+    "billId": "ruu-masyarakat-hukum-adat",
+    "shortTitle": "RUU Masyarakat Adat",
+    "title": "RUU tentang Masyarakat Hukum Adat",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Baleg & Komisi II",
+    "statusSummary": "Harmonisasi Prolegnas Prioritas",
+    "keywords": ["tanah adat", "wilayah adat", "hutan adat", "konflik agraria", "suku"]
+  },
+  {
+    "id": "ruu-perubahan-uu-mk-kumulatif",
+    "billId": "ruu-perubahan-uu-mk-kumulatif",
+    "shortTitle": "RUU Pengesahan MLA Indonesia-Swiss",
+    "title": "RUU tentang Pengesahan Perjanjian Bantuan Hukum Timbal Balik Pidana RI-Swiss",
+    "proposer": "Inisiatif Pemerintah",
+    "committee": "Komisi III",
+    "statusSummary": "Pembahasan Tingkat I",
+    "keywords": ["swiss", "perjanjian internasional", "aset luar negeri", "buronan"]
+  },
+  {
+    "id": "prolegnas-kuhap",
+    "shortTitle": "RUU KUHAP",
+    "title": "RUU tentang Hukum Acara Pidana (Perubahan UU No. 8 Tahun 1981)",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Komisi III",
+    "statusSummary": "Pembahasan Prolegnas Prioritas",
+    "keywords": ["kuhap", "acara pidana", "penangkapan", "penahanan", "praperadilan", "polisi", "jaksa"]
+  },
+  {
+    "id": "prolegnas-penyiaran",
+    "shortTitle": "RUU Penyiaran",
+    "title": "RUU tentang Perubahan Ketiga atas UU No. 32 Tahun 2002 tentang Penyiaran",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Komisi I",
+    "statusSummary": "Penyusunan & Masukan Publik",
+    "keywords": ["televisi", "tv", "radio", "kpi", "jurnalisme investigasi", "konten digital", "streaming"]
+  },
+  {
+    "id": "prolegnas-ketenagakerjaan",
+    "shortTitle": "RUU Ketenagakerjaan Baru",
+    "title": "RUU tentang Ketenagakerjaan (Tindak Lanjut Putusan MK)",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Komisi IX",
+    "statusSummary": "Penyusunan Naskah Akademik & DIM",
+    "keywords": ["buruh", "pekerja", "umk", "ump", "pesangon", "phk", "pkwt", "outsourcing"]
+  },
+  {
+    "id": "prolegnas-ebet",
+    "shortTitle": "RUU Energi Baru & Terbarukan (EBET)",
+    "title": "RUU tentang Energi Baru dan Energi Terbarukan",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Komisi XII",
+    "statusSummary": "Pembahasan Tingkat I",
+    "keywords": ["listrik", "panel surya", "panas bumi", "energi hijau", "transisi energi", "pln", "karbon"]
+  },
+  {
+    "id": "prolegnas-sisdiknas",
+    "shortTitle": "RUU Sisdiknas",
+    "title": "RUU tentang Sistem Pendidikan Nasional",
+    "proposer": "Inisiatif Pemerintah & DPR RI",
+    "committee": "Komisi X",
+    "statusSummary": "Evaluasi Prolegnas Prioritas",
+    "keywords": ["pendidikan", "sekolah", "guru", "dosen", "kurikulum", "ukt", "tunjangan guru"]
+  },
+  {
+    "id": "prolegnas-ppmi",
+    "shortTitle": "RUU Pelindungan Pekerja Migran (PPMI)",
+    "title": "RUU tentang Perubahan atas UU Pelindungan Pekerja Migran Indonesia",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Baleg & Komisi IX",
+    "statusSummary": "Penyusunan di Baleg",
+    "keywords": ["tki", "tkw", "pmi", "pekerja migran", "penempatan luar negeri"]
+  },
+  {
+    "id": "prolegnas-asn",
+    "shortTitle": "RUU Perubahan UU ASN",
+    "title": "RUU tentang Perubahan atas UU No. 20 Tahun 2023 tentang Aparatur Sipil Negara",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Komisi II",
+    "statusSummary": "Prolegnas Prioritas",
+    "keywords": ["pns", "pppk", "honorer", "asn", "birokrasi", "mutasi"]
+  },
+  {
+    "id": "prolegnas-keuangan-haji",
+    "shortTitle": "RUU Pengelolaan Keuangan Haji",
+    "title": "RUU tentang Perubahan atas UU Pengelolaan Keuangan Haji & Penyelenggaraan Haji Umrah",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Komisi VIII",
+    "statusSummary": "Pembahasan Tingkat I",
+    "keywords": ["haji", "umrah", "bpkh", "biaya haji", "kuota haji", "kemenag"]
+  },
+  {
+    "id": "prolegnas-pariwisata",
+    "shortTitle": "RUU Kepariwisataan",
+    "title": "RUU tentang Perubahan atas UU No. 10 Tahun 2009 tentang Kepariwisataan",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Komisi VII",
+    "statusSummary": "Pembahasan Tingkat I",
+    "keywords": ["wisata", "pariwisata", "hotel", "ekonomi kreatif", "desa wisata"]
+  },
+  {
+    "id": "prolegnas-perlindungan-konsumen",
+    "shortTitle": "RUU Perlindungan Konsumen",
+    "title": "RUU tentang Perubahan atas UU No. 8 Tahun 1999 tentang Perlindungan Konsumen",
+    "proposer": "Inisiatif Pemerintah & DPR RI",
+    "committee": "Komisi VI",
+    "statusSummary": "Prolegnas Prioritas",
+    "keywords": ["konsumen", "belanja online", "e-commerce", "penipuan", "bpkn", "ganti rugi"]
+  },
+  {
+    "id": "prolegnas-lpsk",
+    "shortTitle": "RUU Perlindungan Saksi & Korban",
+    "title": "RUU tentang Perubahan Kedua atas UU Perlindungan Saksi dan Korban",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Komisi XIII",
+    "statusSummary": "Prolegnas Prioritas",
+    "keywords": ["lpsk", "saksi", "korban kejahatan", "restitusi", "perlindungan hukum"]
+  },
+  {
+    "id": "prolegnas-reforma-agraria",
+    "shortTitle": "RUU Pengaturan Reforma Agraria",
+    "title": "RUU tentang Pengaturan Reforma Agraria",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Komisi II & Baleg",
+    "statusSummary": "Prolegnas Prioritas",
+    "keywords": ["tanah", "agraria", "sengketa lahan", "sertifikat tanah", "petani", "bpn"]
+  },
+  {
+    "id": "prolegnas-perubahan-iklim",
+    "shortTitle": "RUU Pengelolaan Perubahan Iklim",
+    "title": "RUU tentang Pengelolaan Perubahan Iklim",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Komisi XII & Baleg",
+    "statusSummary": "Prolegnas Prioritas",
+    "keywords": ["iklim", "polusi", "emisi", "banjir", "lingkungan hidup", "karbon"]
+  },
+  {
+    "id": "prolegnas-perumahan",
+    "shortTitle": "RUU Perumahan & Permukiman",
+    "title": "RUU tentang Perubahan atas UU Perumahan dan Kawasan Permukiman",
+    "proposer": "Inisiatif DPR RI",
+    "committee": "Komisi V",
+    "statusSummary": "Prolegnas Prioritas",
+    "keywords": ["rumah subsidi", "kpr", "rusun", "perumahan rakyat", "tapera"]
+  }
+]

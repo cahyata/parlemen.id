@@ -1,0 +1,758 @@
+[
+  {
+    "id": "aceh-1",
+    "name": "Aceh I",
+    "province": "Aceh",
+    "islandGroup": "Sumatera",
+    "seats": 7,
+    "regions": ["Kab. Aceh Selatan", "Kab. Aceh Tenggara", "Kab. Aceh Barat", "Kab. Aceh Besar", "Kab. Pidie", "Kab. Simeulue", "Kab. Aceh Singkil", "Kab. Aceh Barat Daya", "Kab. Gayo Lues", "Kab. Aceh Jaya", "Kab. Nagan Raya", "Kab. Pidie Jaya", "Kota Banda Aceh", "Kota Sabang", "Kota Subulussalam"],
+    "keywords": ["banda aceh", "sabang", "meulaboh", "pidie", "subulussalam"]
+  },
+  {
+    "id": "aceh-2",
+    "name": "Aceh II",
+    "province": "Aceh",
+    "islandGroup": "Sumatera",
+    "seats": 6,
+    "regions": ["Kab. Aceh Timur", "Kab. Aceh Tengah", "Kab. Bener Meriah", "Kab. Aceh Utara", "Kab. Bireuen", "Kab. Aceh Tamiang", "Kota Lhokseumawe", "Kota Langsa"],
+    "keywords": ["lhokseumawe", "langsa", "bireuen", "takengon", "aceh utara"]
+  },
+  {
+    "id": "sumut-1",
+    "name": "Sumatera Utara I",
+    "province": "Sumatera Utara",
+    "islandGroup": "Sumatera",
+    "seats": 10,
+    "regions": ["Kab. Deli Serdang", "Kab. Serdang Bedagai", "Kota Medan", "Kota Tebing Tinggi"],
+    "keywords": ["medan", "deli serdang", "tebing tinggi", "sumut 1"]
+  },
+  {
+    "id": "sumut-2",
+    "name": "Sumatera Utara II",
+    "province": "Sumatera Utara",
+    "islandGroup": "Sumatera",
+    "seats": 10,
+    "regions": ["Kab. Tapanuli Selatan", "Kab. Tapanuli Tengah", "Kab. Tapanuli Utara", "Kab. Nias", "Kab. Labuhanbatu", "Kab. Humbang Hasundutan", "Kab. Toba", "Kab. Mandailing Natal", "Kab. Nias Selatan", "Kab. Pakpak Bharat", "Kab. Padang Lawas", "Kab. Padang Lawas Utara", "Kab. Labuhanbatu Selatan", "Kab. Labuhanbatu Utara", "Kab. Samosir", "Kab. Nias Utara", "Kab. Nias Barat", "Kota Sibolga", "Kota Padangsidimpuan", "Kota Gunungsitoli"],
+    "keywords": ["sibolga", "nias", "toba", "samosir", "padangsidimpuan", "tapanuli", "labuhanbatu", "sumut 2"]
+  },
+  {
+    "id": "sumut-3",
+    "name": "Sumatera Utara III",
+    "province": "Sumatera Utara",
+    "islandGroup": "Sumatera",
+    "seats": 10,
+    "regions": ["Kab. Langkat", "Kab. Karo", "Kab. Simalungun", "Kab. Asahan", "Kab. Dairi", "Kab. Batu Bara", "Kota Pematangsiantar", "Kota Tanjungbalai", "Kota Binjai"],
+    "keywords": ["binjai", "pematangsiantar", "siantar", "tanjungbalai", "karo", "langkat", "sumut 3"]
+  },
+  {
+    "id": "sumbar-1",
+    "name": "Sumatera Barat I",
+    "province": "Sumatera Barat",
+    "islandGroup": "Sumatera",
+    "seats": 8,
+    "regions": ["Kab. Pesisir Selatan", "Kab. Solok", "Kab. Sijunjung", "Kab. Tanah Datar", "Kab. Kepulauan Mentawai", "Kab. Dharmasraya", "Kab. Solok Selatan", "Kota Padang", "Kota Solok", "Kota Sawahlunto", "Kota Padang Panjang"],
+    "keywords": ["padang", "solok", "mentawai", "sawahlunto", "sumbar 1"]
+  },
+  {
+    "id": "sumbar-2",
+    "name": "Sumatera Barat II",
+    "province": "Sumatera Barat",
+    "islandGroup": "Sumatera",
+    "seats": 6,
+    "regions": ["Kab. Padang Pariaman", "Kab. Agam", "Kab. Lima Puluh Kota", "Kab. Pasaman", "Kab. Pasaman Barat", "Kota Bukittinggi", "Kota Payakumbuh", "Kota Pariaman"],
+    "keywords": ["bukittinggi", "payakumbuh", "pariaman", "agam", "sumbar 2"]
+  },
+  {
+    "id": "riau-1",
+    "name": "Riau I",
+    "province": "Riau",
+    "islandGroup": "Sumatera",
+    "seats": 7,
+    "regions": ["Kab. Bengkalis", "Kab. Rokan Hulu", "Kab. Rokan Hilir", "Kab. Siak", "Kab. Kepulauan Meranti", "Kota Pekanbaru", "Kota Dumai"],
+    "keywords": ["pekanbaru", "dumai", "siak", "bengkalis"]
+  },
+  {
+    "id": "riau-2",
+    "name": "Riau II",
+    "province": "Riau",
+    "islandGroup": "Sumatera",
+    "seats": 6,
+    "regions": ["Kab. Kampar", "Kab. Indragiri Hulu", "Kab. Indragiri Hilir", "Kab. Pelalawan", "Kab. Kuantan Singingi"],
+    "keywords": ["kampar", "pelalawan", "indragiri", "kuansing"]
+  },
+  {
+    "id": "jambi",
+    "name": "Jambi",
+    "province": "Jambi",
+    "islandGroup": "Sumatera",
+    "seats": 8,
+    "regions": ["Kab. Kerinci", "Kab. Merangin", "Kab. Sarolangun", "Kab. Batanghari", "Kab. Muaro Jambi", "Kab. Tanjung Jabung Barat", "Kab. Tanjung Jabung Timur", "Kab. Tebo", "Kab. Bungo", "Kota Jambi", "Kota Sungai Penuh"],
+    "keywords": ["jambi", "kerinci", "sungai penuh", "bungo"]
+  },
+  {
+    "id": "sumsel-1",
+    "name": "Sumatera Selatan I",
+    "province": "Sumatera Selatan",
+    "islandGroup": "Sumatera",
+    "seats": 8,
+    "regions": ["Kab. Musi Rawas", "Kab. Musi Banyuasin", "Kab. Banyuasin", "Kab. Musi Rawas Utara", "Kota Palembang", "Kota Lubuklinggau"],
+    "keywords": ["palembang", "lubuklinggau", "banyuasin", "sumsel 1"]
+  },
+  {
+    "id": "sumsel-2",
+    "name": "Sumatera Selatan II",
+    "province": "Sumatera Selatan",
+    "islandGroup": "Sumatera",
+    "seats": 9,
+    "regions": ["Kab. Ogan Komering Ulu", "Kab. Ogan Komering Ilir", "Kab. Muara Enim", "Kab. Lahat", "Kab. Ogan Komering Ulu Timur", "Kab. Ogan Komering Ulu Selatan", "Kab. Ogan Ilir", "Kab. Empat Lawang", "Kab. Penukal Abab Lematang Ilir", "Kota Pagar Alam", "Kota Prabumulih"],
+    "keywords": ["prabumulih", "pagar alam", "muara enim", "lahat", "sumsel 2"]
+  },
+  {
+    "id": "bengkulu",
+    "name": "Bengkulu",
+    "province": "Bengkulu",
+    "islandGroup": "Sumatera",
+    "seats": 4,
+    "regions": ["Kab. Bengkulu Selatan", "Kab. Rejang Lebong", "Kab. Bengkulu Utara", "Kab. Kaur", "Kab. Seluma", "Kab. Mukomuko", "Kab. Lebong", "Kab. Kepahiang", "Kab. Bengkulu Tengah", "Kota Bengkulu"],
+    "keywords": ["bengkulu", "curup", "mukomuko"]
+  },
+  {
+    "id": "lampung-1",
+    "name": "Lampung I",
+    "province": "Lampung",
+    "islandGroup": "Sumatera",
+    "seats": 10,
+    "regions": ["Kab. Lampung Selatan", "Kab. Lampung Barat", "Kab. Tanggamus", "Kab. Pesawaran", "Kab. Pringsewu", "Kab. Pesisir Barat", "Kota Bandar Lampung", "Kota Metro"],
+    "keywords": ["bandar lampung", "metro", "kalianda", "pringsewu", "lampung 1"]
+  },
+  {
+    "id": "lampung-2",
+    "name": "Lampung II",
+    "province": "Lampung",
+    "islandGroup": "Sumatera",
+    "seats": 10,
+    "regions": ["Kab. Lampung Tengah", "Kab. Lampung Utara", "Kab. Way Kanan", "Kab. Tulang Bawang", "Kab. Lampung Timur", "Kab. Mesuji", "Kab. Tulang Bawang Barat"],
+    "keywords": ["kotabumi", "lampung tengah", "lampung timur", "tulang bawang", "lampung 2"]
+  },
+  {
+    "id": "babel",
+    "name": "Kepulauan Bangka Belitung",
+    "province": "Kepulauan Bangka Belitung",
+    "islandGroup": "Sumatera",
+    "seats": 3,
+    "regions": ["Kab. Bangka", "Kab. Belitung", "Kab. Bangka Selatan", "Kab. Bangka Tengah", "Kab. Bangka Barat", "Kab. Belitung Timur", "Kota Pangkalpinang"],
+    "keywords": ["pangkalpinang", "bangka", "belitung", "babel"]
+  },
+  {
+    "id": "kepri",
+    "name": "Kepulauan Riau",
+    "province": "Kepulauan Riau",
+    "islandGroup": "Sumatera",
+    "seats": 4,
+    "regions": ["Kab. Bintan", "Kab. Karimun", "Kab. Natuna", "Kab. Lingga", "Kab. Kepulauan Anambas", "Kota Batam", "Kota Tanjungpinang"],
+    "keywords": ["batam", "tanjungpinang", "bintan", "natuna", "kepri"]
+  },
+  {
+    "id": "dki-1",
+    "name": "DKI Jakarta I",
+    "province": "DKI Jakarta",
+    "islandGroup": "Jawa",
+    "seats": 6,
+    "regions": ["Kota Administrasi Jakarta Timur"],
+    "keywords": ["jakarta timur", "jaktim", "cakung", "jatinegara", "rawamangun", "dki 1"]
+  },
+  {
+    "id": "dki-2",
+    "name": "DKI Jakarta II",
+    "province": "DKI Jakarta",
+    "islandGroup": "Jawa",
+    "seats": 7,
+    "regions": ["Kota Administrasi Jakarta Pusat", "Kota Administrasi Jakarta Selatan", "Luar Negeri"],
+    "keywords": ["jakarta pusat", "jakpus", "jakarta selatan", "jaksel", "luar negeri", "diaspora", "dki 2"]
+  },
+  {
+    "id": "dki-3",
+    "name": "DKI Jakarta III",
+    "province": "DKI Jakarta",
+    "islandGroup": "Jawa",
+    "seats": 8,
+    "regions": ["Kab. Administrasi Kepulauan Seribu", "Kota Administrasi Jakarta Barat", "Kota Administrasi Jakarta Utara"],
+    "keywords": ["jakarta barat", "jakbar", "jakarta utara", "jakut", "kepulauan seribu", "dki 3"]
+  },
+  {
+    "id": "jabar-1",
+    "name": "Jawa Barat I",
+    "province": "Jawa Barat",
+    "islandGroup": "Jawa",
+    "seats": 7,
+    "regions": ["Kota Bandung", "Kota Cimahi"],
+    "keywords": ["bandung", "cimahi", "jabar 1"]
+  },
+  {
+    "id": "jabar-2",
+    "name": "Jawa Barat II",
+    "province": "Jawa Barat",
+    "islandGroup": "Jawa",
+    "seats": 10,
+    "regions": ["Kab. Bandung", "Kab. Bandung Barat"],
+    "keywords": ["soreang", "lembang", "bandung barat", "kabupaten bandung", "jabar 2"]
+  },
+  {
+    "id": "jabar-3",
+    "name": "Jawa Barat III",
+    "province": "Jawa Barat",
+    "islandGroup": "Jawa",
+    "seats": 9,
+    "regions": ["Kab. Cianjur", "Kota Bogor"],
+    "keywords": ["bogor", "kota bogor", "cianjur", "jabar 3"]
+  },
+  {
+    "id": "jabar-4",
+    "name": "Jawa Barat IV",
+    "province": "Jawa Barat",
+    "islandGroup": "Jawa",
+    "seats": 6,
+    "regions": ["Kab. Sukabumi", "Kota Sukabumi"],
+    "keywords": ["sukabumi", "jabar 4"]
+  },
+  {
+    "id": "jabar-5",
+    "name": "Jawa Barat V",
+    "province": "Jawa Barat",
+    "islandGroup": "Jawa",
+    "seats": 9,
+    "regions": ["Kab. Bogor"],
+    "keywords": ["cibinong", "kabupaten bogor", "sentul", "jabar 5"]
+  },
+  {
+    "id": "jabar-6",
+    "name": "Jawa Barat VI",
+    "province": "Jawa Barat",
+    "islandGroup": "Jawa",
+    "seats": 6,
+    "regions": ["Kota Bekasi", "Kota Depok"],
+    "keywords": ["bekasi", "depok", "jabar 6"]
+  },
+  {
+    "id": "jabar-7",
+    "name": "Jawa Barat VII",
+    "province": "Jawa Barat",
+    "islandGroup": "Jawa",
+    "seats": 10,
+    "regions": ["Kab. Bekasi", "Kab. Karawang", "Kab. Purwakarta"],
+    "keywords": ["cikarang", "karawang", "purwakarta", "kabupaten bekasi", "jabar 7"]
+  },
+  {
+    "id": "jabar-8",
+    "name": "Jawa Barat VIII",
+    "province": "Jawa Barat",
+    "islandGroup": "Jawa",
+    "seats": 9,
+    "regions": ["Kab. Cirebon", "Kab. Indramayu", "Kota Cirebon"],
+    "keywords": ["cirebon", "indramayu", "jabar 8"]
+  },
+  {
+    "id": "jabar-9",
+    "name": "Jawa Barat IX",
+    "province": "Jawa Barat",
+    "islandGroup": "Jawa",
+    "seats": 8,
+    "regions": ["Kab. Subang", "Kab. Majalengka", "Kab. Sumedang"],
+    "keywords": ["subang", "majalengka", "sumedang", "jabar 9"]
+  },
+  {
+    "id": "jabar-10",
+    "name": "Jawa Barat X",
+    "province": "Jawa Barat",
+    "islandGroup": "Jawa",
+    "seats": 7,
+    "regions": ["Kab. Kuningan", "Kab. Ciamis", "Kab. Pangandaran", "Kota Banjar"],
+    "keywords": ["kuningan", "ciamis", "pangandaran", "banjar", "jabar 10"]
+  },
+  {
+    "id": "jabar-11",
+    "name": "Jawa Barat XI",
+    "province": "Jawa Barat",
+    "islandGroup": "Jawa",
+    "seats": 10,
+    "regions": ["Kab. Garut", "Kab. Tasikmalaya", "Kota Tasikmalaya"],
+    "keywords": ["garut", "tasikmalaya", "tasik", "jabar 11"]
+  },
+  {
+    "id": "jateng-1",
+    "name": "Jawa Tengah I",
+    "province": "Jawa Tengah",
+    "islandGroup": "Jawa",
+    "seats": 8,
+    "regions": ["Kab. Semarang", "Kab. Kendal", "Kota Semarang", "Kota Salatiga"],
+    "keywords": ["semarang", "salatiga", "kendal", "ungaran", "jateng 1"]
+  },
+  {
+    "id": "jateng-2",
+    "name": "Jawa Tengah II",
+    "province": "Jawa Tengah",
+    "islandGroup": "Jawa",
+    "seats": 7,
+    "regions": ["Kab. Kudus", "Kab. Jepara", "Kab. Demak"],
+    "keywords": ["kudus", "jepara", "demak", "jateng 2"]
+  },
+  {
+    "id": "jateng-3",
+    "name": "Jawa Tengah III",
+    "province": "Jawa Tengah",
+    "islandGroup": "Jawa",
+    "seats": 9,
+    "regions": ["Kab. Grobogan", "Kab. Blora", "Kab. Pati", "Kab. Rembang"],
+    "keywords": ["pati", "blora", "rembang", "purwodadi", "grobogan", "jateng 3"]
+  },
+  {
+    "id": "jateng-4",
+    "name": "Jawa Tengah IV",
+    "province": "Jawa Tengah",
+    "islandGroup": "Jawa",
+    "seats": 7,
+    "regions": ["Kab. Wonogiri", "Kab. Karanganyar", "Kab. Sragen"],
+    "keywords": ["wonogiri", "karanganyar", "sragen", "jateng 4"]
+  },
+  {
+    "id": "jateng-5",
+    "name": "Jawa Tengah V",
+    "province": "Jawa Tengah",
+    "islandGroup": "Jawa",
+    "seats": 8,
+    "regions": ["Kab. Boyolali", "Kab. Klaten", "Kab. Sukoharjo", "Kota Surakarta"],
+    "keywords": ["solo", "surakarta", "klaten", "boyolali", "sukoharjo", "jateng 5"]
+  },
+  {
+    "id": "jateng-6",
+    "name": "Jawa Tengah VI",
+    "province": "Jawa Tengah",
+    "islandGroup": "Jawa",
+    "seats": 8,
+    "regions": ["Kab. Purworejo", "Kab. Wonosobo", "Kab. Magelang", "Kab. Temanggung", "Kota Magelang"],
+    "keywords": ["magelang", "wonosobo", "temanggung", "purworejo", "jateng 6"]
+  },
+  {
+    "id": "jateng-7",
+    "name": "Jawa Tengah VII",
+    "province": "Jawa Tengah",
+    "islandGroup": "Jawa",
+    "seats": 7,
+    "regions": ["Kab. Purbalingga", "Kab. Banjarnegara", "Kab. Kebumen"],
+    "keywords": ["kebumen", "banjarnegara", "purbalingga", "jateng 7"]
+  },
+  {
+    "id": "jateng-8",
+    "name": "Jawa Tengah VIII",
+    "province": "Jawa Tengah",
+    "islandGroup": "Jawa",
+    "seats": 8,
+    "regions": ["Kab. Cilacap", "Kab. Banyumas"],
+    "keywords": ["purwokerto", "banyumas", "cilacap", "jateng 8"]
+  },
+  {
+    "id": "jateng-9",
+    "name": "Jawa Tengah IX",
+    "province": "Jawa Tengah",
+    "islandGroup": "Jawa",
+    "seats": 8,
+    "regions": ["Kab. Tegal", "Kab. Brebes", "Kota Tegal"],
+    "keywords": ["tegal", "brebes", "slawi", "jateng 9"]
+  },
+  {
+    "id": "jateng-10",
+    "name": "Jawa Tengah X",
+    "province": "Jawa Tengah",
+    "islandGroup": "Jawa",
+    "seats": 7,
+    "regions": ["Kab. Batang", "Kab. Pekalongan", "Kab. Pemalang", "Kota Pekalongan"],
+    "keywords": ["pekalongan", "pemalang", "batang", "jateng 10"]
+  },
+  {
+    "id": "diy",
+    "name": "DI Yogyakarta",
+    "province": "DI Yogyakarta",
+    "islandGroup": "Jawa",
+    "seats": 8,
+    "regions": ["Kab. Kulon Progo", "Kab. Bantul", "Kab. Gunungkidul", "Kab. Sleman", "Kota Yogyakarta"],
+    "keywords": ["yogyakarta", "jogja", "sleman", "bantul", "gunungkidul", "diy"]
+  },
+  {
+    "id": "jatim-1",
+    "name": "Jawa Timur I",
+    "province": "Jawa Timur",
+    "islandGroup": "Jawa",
+    "seats": 10,
+    "regions": ["Kab. Sidoarjo", "Kota Surabaya"],
+    "keywords": ["surabaya", "sidoarjo", "jatim 1"]
+  },
+  {
+    "id": "jatim-2",
+    "name": "Jawa Timur II",
+    "province": "Jawa Timur",
+    "islandGroup": "Jawa",
+    "seats": 7,
+    "regions": ["Kab. Probolinggo", "Kab. Pasuruan", "Kota Probolinggo", "Kota Pasuruan"],
+    "keywords": ["probolinggo", "pasuruan", "jatim 2"]
+  },
+  {
+    "id": "jatim-3",
+    "name": "Jawa Timur III",
+    "province": "Jawa Timur",
+    "islandGroup": "Jawa",
+    "seats": 7,
+    "regions": ["Kab. Banyuwangi", "Kab. Bondowoso", "Kab. Situbondo"],
+    "keywords": ["banyuwangi", "bondowoso", "situbondo", "jatim 3"]
+  },
+  {
+    "id": "jatim-4",
+    "name": "Jawa Timur IV",
+    "province": "Jawa Timur",
+    "islandGroup": "Jawa",
+    "seats": 8,
+    "regions": ["Kab. Lumajang", "Kab. Jember"],
+    "keywords": ["jember", "lumajang", "jatim 4"]
+  },
+  {
+    "id": "jatim-5",
+    "name": "Jawa Timur V",
+    "province": "Jawa Timur",
+    "islandGroup": "Jawa",
+    "seats": 8,
+    "regions": ["Kab. Malang", "Kota Malang", "Kota Batu"],
+    "keywords": ["malang", "batu", "jatim 5"]
+  },
+  {
+    "id": "jatim-6",
+    "name": "Jawa Timur VI",
+    "province": "Jawa Timur",
+    "islandGroup": "Jawa",
+    "seats": 9,
+    "regions": ["Kab. Kediri", "Kab. Blitar", "Kab. Tulungagung", "Kota Kediri", "Kota Blitar"],
+    "keywords": ["kediri", "blitar", "tulungagung", "jatim 6"]
+  },
+  {
+    "id": "jatim-7",
+    "name": "Jawa Timur VII",
+    "province": "Jawa Timur",
+    "islandGroup": "Jawa",
+    "seats": 8,
+    "regions": ["Kab. Pacitan", "Kab. Ponorogo", "Kab. Trenggalek", "Kab. Magetan", "Kab. Ngawi"],
+    "keywords": ["pacitan", "ponorogo", "trenggalek", "magetan", "ngawi", "jatim 7"]
+  },
+  {
+    "id": "jatim-8",
+    "name": "Jawa Timur VIII",
+    "province": "Jawa Timur",
+    "islandGroup": "Jawa",
+    "seats": 10,
+    "regions": ["Kab. Mojokerto", "Kab. Jombang", "Kab. Nganjuk", "Kab. Madiun", "Kota Mojokerto", "Kota Madiun"],
+    "keywords": ["madiun", "mojokerto", "jombang", "nganjuk", "jatim 8"]
+  },
+  {
+    "id": "jatim-9",
+    "name": "Jawa Timur IX",
+    "province": "Jawa Timur",
+    "islandGroup": "Jawa",
+    "seats": 6,
+    "regions": ["Kab. Bojonegoro", "Kab. Tuban"],
+    "keywords": ["bojonegoro", "tuban", "jatim 9"]
+  },
+  {
+    "id": "jatim-10",
+    "name": "Jawa Timur X",
+    "province": "Jawa Timur",
+    "islandGroup": "Jawa",
+    "seats": 6,
+    "regions": ["Kab. Gresik", "Kab. Lamongan"],
+    "keywords": ["gresik", "lamongan", "jatim 10"]
+  },
+  {
+    "id": "jatim-11",
+    "name": "Jawa Timur XI",
+    "province": "Jawa Timur",
+    "islandGroup": "Jawa",
+    "seats": 8,
+    "regions": ["Kab. Bangkalan", "Kab. Sampang", "Kab. Pamekasan", "Kab. Sumenep"],
+    "keywords": ["madura", "bangkalan", "sampang", "pamekasan", "sumenep", "jatim 11"]
+  },
+  {
+    "id": "banten-1",
+    "name": "Banten I",
+    "province": "Banten",
+    "islandGroup": "Jawa",
+    "seats": 6,
+    "regions": ["Kab. Pandeglang", "Kab. Lebak"],
+    "keywords": ["pandeglang", "lebak", "rangkasbitung"]
+  },
+  {
+    "id": "banten-2",
+    "name": "Banten II",
+    "province": "Banten",
+    "islandGroup": "Jawa",
+    "seats": 6,
+    "regions": ["Kab. Serang", "Kota Cilegon", "Kota Serang"],
+    "keywords": ["serang", "cilegon"]
+  },
+  {
+    "id": "banten-3",
+    "name": "Banten III",
+    "province": "Banten",
+    "islandGroup": "Jawa",
+    "seats": 10,
+    "regions": ["Kab. Tangerang", "Kota Tangerang", "Kota Tangerang Selatan"],
+    "keywords": ["tangerang", "tangerang selatan", "tangsel", "bsd", "serpong"]
+  },
+  {
+    "id": "bali",
+    "name": "Bali",
+    "province": "Bali",
+    "islandGroup": "Bali & Nusa Tenggara",
+    "seats": 9,
+    "regions": ["Kab. Jembrana", "Kab. Tabanan", "Kab. Badung", "Kab. Gianyar", "Kab. Klungkung", "Kab. Bangli", "Kab. Karangasem", "Kab. Buleleng", "Kota Denpasar"],
+    "keywords": ["bali", "denpasar", "badung", "gianyar", "ubud", "singaraja"]
+  },
+  {
+    "id": "ntb-1",
+    "name": "Nusa Tenggara Barat I",
+    "province": "Nusa Tenggara Barat",
+    "islandGroup": "Bali & Nusa Tenggara",
+    "seats": 3,
+    "regions": ["Kab. Sumbawa", "Kab. Dompu", "Kab. Bima", "Kab. Sumbawa Barat", "Kota Bima"],
+    "keywords": ["sumbawa", "bima", "dompu", "ntb 1"]
+  },
+  {
+    "id": "ntb-2",
+    "name": "Nusa Tenggara Barat II",
+    "province": "Nusa Tenggara Barat",
+    "islandGroup": "Bali & Nusa Tenggara",
+    "seats": 8,
+    "regions": ["Kab. Lombok Barat", "Kab. Lombok Tengah", "Kab. Lombok Timur", "Kab. Lombok Utara", "Kota Mataram"],
+    "keywords": ["lombok", "mataram", "mandalika", "ntb 2"]
+  },
+  {
+    "id": "ntt-1",
+    "name": "Nusa Tenggara Timur I",
+    "province": "Nusa Tenggara Timur",
+    "islandGroup": "Bali & Nusa Tenggara",
+    "seats": 6,
+    "regions": ["Kab. Alor", "Kab. Ende", "Kab. Flores Timur", "Kab. Lembata", "Kab. Manggarai", "Kab. Manggarai Barat", "Kab. Manggarai Timur", "Kab. Nagekeo", "Kab. Ngada", "Kab. Sikka"],
+    "keywords": ["flores", "labuan bajo", "maumere", "ende", "ntt 1"]
+  },
+  {
+    "id": "ntt-2",
+    "name": "Nusa Tenggara Timur II",
+    "province": "Nusa Tenggara Timur",
+    "islandGroup": "Bali & Nusa Tenggara",
+    "seats": 7,
+    "regions": ["Kab. Belu", "Kab. Kupang", "Kab. Malaka", "Kab. Rote Ndao", "Kab. Sabu Raijua", "Kab. Sumba Barat", "Kab. Sumba Barat Daya", "Kab. Sumba Tengah", "Kab. Sumba Timur", "Kab. Timor Tengah Selatan", "Kab. Timor Tengah Utara", "Kota Kupang"],
+    "keywords": ["kupang", "sumba", "timor", "atambua", "ntt 2"]
+  },
+  {
+    "id": "kalbar-1",
+    "name": "Kalimantan Barat I",
+    "province": "Kalimantan Barat",
+    "islandGroup": "Kalimantan",
+    "seats": 8,
+    "regions": ["Kab. Sambas", "Kab. Mempawah", "Kab. Landak", "Kab. Ketapang", "Kab. Kayong Utara", "Kab. Kubu Raya", "Kab. Bengkayang", "Kota Pontianak", "Kota Singkawang"],
+    "keywords": ["pontianak", "singkawang", "ketapang", "sambas", "kalbar 1"]
+  },
+  {
+    "id": "kalbar-2",
+    "name": "Kalimantan Barat II",
+    "province": "Kalimantan Barat",
+    "islandGroup": "Kalimantan",
+    "seats": 4,
+    "regions": ["Kab. Sanggau", "Kab. Sintang", "Kab. Kapuas Hulu", "Kab. Sekadau", "Kab. Melawi"],
+    "keywords": ["sintang", "sanggau", "kapuas hulu", "kalbar 2"]
+  },
+  {
+    "id": "kalteng",
+    "name": "Kalimantan Tengah",
+    "province": "Kalimantan Tengah",
+    "islandGroup": "Kalimantan",
+    "seats": 6,
+    "regions": ["Kab. Kotawaringin Barat", "Kab. Kotawaringin Timur", "Kab. Kapuas", "Kab. Barito Selatan", "Kab. Barito Utara", "Kab. Katingan", "Kab. Seruyan", "Kab. Sukamara", "Kab. Lamandau", "Kab. Gunung Mas", "Kab. Pulang Pisau", "Kab. Murung Raya", "Kab. Barito Timur", "Kota Palangka Raya"],
+    "keywords": ["palangka raya", "palangkaraya", "sampit", "pangkalan bun", "kalteng"]
+  },
+  {
+    "id": "kalsel-1",
+    "name": "Kalimantan Selatan I",
+    "province": "Kalimantan Selatan",
+    "islandGroup": "Kalimantan",
+    "seats": 6,
+    "regions": ["Kab. Banjar", "Kab. Barito Kuala", "Kab. Tapin", "Kab. Hulu Sungai Selatan", "Kab. Hulu Sungai Tengah", "Kab. Hulu Sungai Utara", "Kab. Tabalong", "Kab. Balangan"],
+    "keywords": ["martapura", "banjar", "kandangan", "barabai", "tabalong", "kalsel 1"]
+  },
+  {
+    "id": "kalsel-2",
+    "name": "Kalimantan Selatan II",
+    "province": "Kalimantan Selatan",
+    "islandGroup": "Kalimantan",
+    "seats": 5,
+    "regions": ["Kab. Tanah Laut", "Kab. Kotabaru", "Kab. Tanah Bumbu", "Kota Banjarmasin", "Kota Banjarbaru"],
+    "keywords": ["banjarmasin", "banjarbaru", "kotabaru", "kalsel 2"]
+  },
+  {
+    "id": "kaltim",
+    "name": "Kalimantan Timur",
+    "province": "Kalimantan Timur",
+    "islandGroup": "Kalimantan",
+    "seats": 8,
+    "regions": ["Kab. Paser", "Kab. Kutai Kartanegara", "Kab. Berau", "Kab. Kutai Barat", "Kab. Kutai Timur", "Kab. Penajam Paser Utara", "Kab. Mahakam Ulu", "Kota Balikpapan", "Kota Samarinda", "Kota Bontang"],
+    "keywords": ["samarinda", "balikpapan", "bontang", "ikn", "nusantara", "penajam", "kutai", "kaltim"]
+  },
+  {
+    "id": "kaltara",
+    "name": "Kalimantan Utara",
+    "province": "Kalimantan Utara",
+    "islandGroup": "Kalimantan",
+    "seats": 3,
+    "regions": ["Kab. Bulungan", "Kab. Malinau", "Kab. Nunukan", "Kab. Tana Tidung", "Kota Tarakan"],
+    "keywords": ["tarakan", "nunukan", "bulungan", "kaltara"]
+  },
+  {
+    "id": "sulut",
+    "name": "Sulawesi Utara",
+    "province": "Sulawesi Utara",
+    "islandGroup": "Sulawesi",
+    "seats": 6,
+    "regions": ["Kab. Bolaang Mongondow", "Kab. Minahasa", "Kab. Kepulauan Sangihe", "Kab. Kepulauan Talaud", "Kab. Minahasa Selatan", "Kab. Minahasa Utara", "Kab. Minahasa Tenggara", "Kab. Bolaang Mongondow Utara", "Kab. Siau Tagulandang Biaro", "Kab. Bolaang Mongondow Timur", "Kab. Bolaang Mongondow Selatan", "Kota Manado", "Kota Bitung", "Kota Tomohon", "Kota Kotamobagu"],
+    "keywords": ["manado", "bitung", "tomohon", "minahasa", "sulut"]
+  },
+  {
+    "id": "sulteng",
+    "name": "Sulawesi Tengah",
+    "province": "Sulawesi Tengah",
+    "islandGroup": "Sulawesi",
+    "seats": 7,
+    "regions": ["Kab. Banggai", "Kab. Poso", "Kab. Donggala", "Kab. Tolitoli", "Kab. Buol", "Kab. Morowali", "Kab. Banggai Kepulauan", "Kab. Parigi Moutong", "Kab. Tojo Una-Una", "Kab. Sigi", "Kab. Banggai Laut", "Kab. Morowali Utara", "Kota Palu"],
+    "keywords": ["palu", "poso", "morowali", "luwuk", "sulteng"]
+  },
+  {
+    "id": "sulsel-1",
+    "name": "Sulawesi Selatan I",
+    "province": "Sulawesi Selatan",
+    "islandGroup": "Sulawesi",
+    "seats": 8,
+    "regions": ["Kab. Kepulauan Selayar", "Kab. Bantaeng", "Kab. Jeneponto", "Kab. Takalar", "Kab. Gowa", "Kota Makassar"],
+    "keywords": ["makassar", "gowa", "takalar", "selayar", "sulsel 1"]
+  },
+  {
+    "id": "sulsel-2",
+    "name": "Sulawesi Selatan II",
+    "province": "Sulawesi Selatan",
+    "islandGroup": "Sulawesi",
+    "seats": 9,
+    "regions": ["Kab. Bulukumba", "Kab. Sinjai", "Kab. Bone", "Kab. Maros", "Kab. Pangkajene dan Kepulauan", "Kab. Barru", "Kab. Soppeng", "Kab. Wajo", "Kota Parepare"],
+    "keywords": ["parepare", "bone", "maros", "bulukumba", "sulsel 2"]
+  },
+  {
+    "id": "sulsel-3",
+    "name": "Sulawesi Selatan III",
+    "province": "Sulawesi Selatan",
+    "islandGroup": "Sulawesi",
+    "seats": 7,
+    "regions": ["Kab. Pinrang", "Kab. Sidenreng Rappang", "Kab. Enrekang", "Kab. Luwu", "Kab. Tana Toraja", "Kab. Luwu Utara", "Kab. Luwu Timur", "Kab. Toraja Utara", "Kota Palopo"],
+    "keywords": ["palopo", "toraja", "tana toraja", "luwu", "pinrang", "sulsel 3"]
+  },
+  {
+    "id": "sultra",
+    "name": "Sulawesi Tenggara",
+    "province": "Sulawesi Tenggara",
+    "islandGroup": "Sulawesi",
+    "seats": 6,
+    "regions": ["Kab. Kolaka", "Kab. Konawe", "Kab. Muna", "Kab. Buton", "Kab. Konawe Selatan", "Kab. Bombana", "Kab. Wakatobi", "Kab. Kolaka Utara", "Kab. Konawe Utara", "Kab. Buton Utara", "Kab. Kolaka Timur", "Kab. Konawe Kepulauan", "Kab. Muna Barat", "Kab. Buton Tengah", "Kab. Buton Selatan", "Kota Kendari", "Kota Baubau"],
+    "keywords": ["kendari", "baubau", "wakatobi", "buton", "kolaka", "sultra"]
+  },
+  {
+    "id": "gorontalo",
+    "name": "Gorontalo",
+    "province": "Gorontalo",
+    "islandGroup": "Sulawesi",
+    "seats": 3,
+    "regions": ["Kab. Boalemo", "Kab. Gorontalo", "Kab. Pohuwato", "Kab. Bone Bolango", "Kab. Gorontalo Utara", "Kota Gorontalo"],
+    "keywords": ["gorontalo"]
+  },
+  {
+    "id": "sulbar",
+    "name": "Sulawesi Barat",
+    "province": "Sulawesi Barat",
+    "islandGroup": "Sulawesi",
+    "seats": 4,
+    "regions": ["Kab. Mamuju Utara (Pasangkayu)", "Kab. Mamuju", "Kab. Mamasa", "Kab. Polewali Mandar", "Kab. Majene", "Kab. Mamuju Tengah"],
+    "keywords": ["mamuju", "majene", "polewali mandar", "sulbar"]
+  },
+  {
+    "id": "maluku",
+    "name": "Maluku",
+    "province": "Maluku",
+    "islandGroup": "Maluku & Papua",
+    "seats": 4,
+    "regions": ["Kab. Maluku Tengah", "Kab. Maluku Tenggara", "Kab. Kepulauan Tanimbar", "Kab. Buru", "Kab. Seram Bagian Timur", "Kab. Seram Bagian Barat", "Kab. Kepulauan Aru", "Kab. Maluku Barat Daya", "Kab. Buru Selatan", "Kota Ambon", "Kota Tual"],
+    "keywords": ["ambon", "tual", "banda neira", "maluku"]
+  },
+  {
+    "id": "malut",
+    "name": "Maluku Utara",
+    "province": "Maluku Utara",
+    "islandGroup": "Maluku & Papua",
+    "seats": 3,
+    "regions": ["Kab. Halmahera Barat", "Kab. Halmahera Tengah", "Kab. Halmahera Utara", "Kab. Halmahera Selatan", "Kab. Kepulauan Sula", "Kab. Halmahera Timur", "Kab. Pulau Morotai", "Kab. Pulau Taliabu", "Kota Ternate", "Kota Tidore Kepulauan"],
+    "keywords": ["ternate", "tidore", "sofifi", "halmahera", "malut"]
+  },
+  {
+    "id": "papua",
+    "name": "Papua",
+    "province": "Papua",
+    "islandGroup": "Maluku & Papua",
+    "seats": 3,
+    "regions": ["Kab. Jayapura", "Kab. Biak Numfor", "Kab. Kepulauan Yapen", "Kab. Sarmi", "Kab. Keerom", "Kab. Waropen", "Kab. Supiori", "Kab. Mamberamo Raya", "Kota Jayapura"],
+    "keywords": ["jayapura", "biak", "sentani"]
+  },
+  {
+    "id": "papua-barat",
+    "name": "Papua Barat",
+    "province": "Papua Barat",
+    "islandGroup": "Maluku & Papua",
+    "seats": 3,
+    "regions": ["Kab. Manokwari", "Kab. Fakfak", "Kab. Teluk Bintuni", "Kab. Teluk Wondama", "Kab. Kaimana", "Kab. Manokwari Selatan", "Kab. Pegunungan Arfak"],
+    "keywords": ["manokwari", "fakfak", "bintuni", "kaimana"]
+  },
+  {
+    "id": "papua-selatan",
+    "name": "Papua Selatan",
+    "province": "Papua Selatan",
+    "islandGroup": "Maluku & Papua",
+    "seats": 3,
+    "regions": ["Kab. Merauke", "Kab. Boven Digoel", "Kab. Mappi", "Kab. Asmat"],
+    "keywords": ["merauke", "asmat", "boven digoel"]
+  },
+  {
+    "id": "papua-tengah",
+    "name": "Papua Tengah",
+    "province": "Papua Tengah",
+    "islandGroup": "Maluku & Papua",
+    "seats": 3,
+    "regions": ["Kab. Nabire", "Kab. Paniai", "Kab. Mimika", "Kab. Puncak Jaya", "Kab. Puncak", "Kab. Dogiyai", "Kab. Intan Jaya", "Kab. Deiyai"],
+    "keywords": ["timika", "mimika", "nabire", "paniai"]
+  },
+  {
+    "id": "papua-pegunungan",
+    "name": "Papua Pegunungan",
+    "province": "Papua Pegunungan",
+    "islandGroup": "Maluku & Papua",
+    "seats": 3,
+    "regions": ["Kab. Jayawijaya", "Kab. Pegunungan Bintang", "Kab. Yahukimo", "Kab. Tolikara", "Kab. Mamberamo Tengah", "Kab. Yalimo", "Kab. Lanny Jaya", "Kab. Nduga"],
+    "keywords": ["wamena", "jayawijaya", "yahukimo", "pegunungan"]
+  },
+  {
+    "id": "papua-barat-daya",
+    "name": "Papua Barat Daya",
+    "province": "Papua Barat Daya",
+    "islandGroup": "Maluku & Papua",
+    "seats": 3,
+    "regions": ["Kab. Sorong", "Kab. Sorong Selatan", "Kab. Raja Ampat", "Kab. Tambrauw", "Kab. Maybrat", "Kota Sorong"],
+    "keywords": ["sorong", "raja ampat", "waisai"]
+  }
+]

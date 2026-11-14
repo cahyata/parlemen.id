@@ -1,9 +1,11 @@
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Search, Filter, FileText, ArrowRight, Info, MessageSquarePlus, X } from 'lucide-react';
+import { Search, Filter, FileText, ArrowRight, Info, MessageSquarePlus, X, Bookmark, ListChecks } from 'lucide-react';
 import { BILLS, LEGISLATIVE_STAGES, type LegislativeStageIndex } from '../data/parliamentData';
+import { PROLEGNAS_PRIORITAS } from '../data/referenceData';
 import { BillStageStepper } from '../components/BillStageStepper';
 import { PageHeader } from '../components/PageHeader';
+import { useWatchlist } from '../utils/watchlist';
 
 const CATEGORIES = ['Semua', 'Prolegnas Prioritas 2026', 'Kumulatif Terbuka', 'RUU APBN'] as const;
 const PROPOSERS = ['Semua', 'Inisiatif DPR RI', 'Inisiatif Pemerintah', 'Inisiatif DPD RI'] as const;
@@ -17,12 +19,16 @@ export function LegislasiPage() {
   const [category, setCategory] = useState<string>('Semua');
   const [proposer, setProposer] = useState<string>('Semua');
   const [stageFilter, setStageFilter] = useState<LegislativeStageIndex | 'all'>('all');
+  const [onlyWatched, setOnlyWatched] = useState(false);
   const [showStageGuide, setShowStageGuide] = useState(false);
+
+  const { billIds, isBillWatched, toggleBill } = useWatchlist();
 
   const filteredBills = useMemo(() => {
     const q = query.trim().toLowerCase();
     const akd = initialAkd.trim().toLowerCase();
     return BILLS.filter((bill) => {
+      if (onlyWatched && !billIds.includes(bill.id)) return false;
       if (category !== 'Semua' && bill.category !== category) return false;
       if (proposer !== 'Semua' && bill.proposer !== proposer) return false;
       if (stageFilter !== 'all' && bill.stage !== stageFilter) return false;
@@ -33,17 +39,35 @@ export function LegislasiPage() {
       }
       return true;
     });
-  }, [query, category, proposer, stageFilter, initialAkd]);
+  }, [query, category, proposer, stageFilter, initialAkd, onlyWatched, billIds]);
+
+  const filteredProlegnas = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const akd = initialAkd.trim().toLowerCase();
+    return PROLEGNAS_PRIORITAS.filter((item) => {
+      if (item.billId) return false;
+      if (proposer !== 'Semua' && !item.proposer.toLowerCase().includes(proposer.replace('Inisiatif ', '').toLowerCase())) {
+        return false;
+      }
+      if (akd && !item.committee.toLowerCase().includes(akd)) return false;
+      if (q) {
+        const hay = `${item.shortTitle} ${item.title} ${item.committee} ${item.statusSummary} ${item.keywords.join(' ')}`.toLowerCase();
+        return hay.includes(q);
+      }
+      return true;
+    });
+  }, [query, proposer, initialAkd]);
 
   const clearAllFilters = () => {
     setQuery('');
     setCategory('Semua');
     setProposer('Semua');
     setStageFilter('all');
+    setOnlyWatched(false);
     setSearchParams({});
   };
 
-  const hasActiveFilters = Boolean(query || category !== 'Semua' || proposer !== 'Semua' || stageFilter !== 'all' || initialAkd);
+  const hasActiveFilters = Boolean(query || category !== 'Semua' || proposer !== 'Semua' || stageFilter !== 'all' || initialAkd || onlyWatched);
 
   return (
     <div>
@@ -188,16 +212,30 @@ export function LegislasiPage() {
           </div>
 
           <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-[#5A6472]">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Filter className="h-3.5 w-3.5 text-[#7A1822]" />
               <span>
-                Menampilkan <strong className="font-mono-num text-[#14171F]">{filteredBills.length}</strong> dari{' '}
-                <span className="font-mono-num">{BILLS.length}</span> RUU dalam registrasi aktif
+                Menampilkan <strong className="font-mono-num text-[#14171F]">{filteredBills.length}</strong> RUU terinci +{' '}
+                <strong className="font-mono-num text-[#14171F]">{filteredProlegnas.length}</strong> daftar Prolegnas Prioritas
               </span>
               {initialAkd && (
                 <span className="rounded-full bg-[#7A1822]/12 px-2.5 py-0.5 font-bold text-[#7A1822]">
                   AKD: {initialAkd}
                 </span>
+              )}
+              {billIds.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setOnlyWatched((prev) => !prev)}
+                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-bold transition-all cursor-pointer ${
+                    onlyWatched
+                      ? 'bg-[#7A1822] text-white'
+                      : 'bg-white/90 text-[#14171F] hover:text-[#7A1822]'
+                  }`}
+                >
+                  <Bookmark className={`h-3 w-3 ${onlyWatched ? 'fill-current' : ''}`} />
+                  Dipantau ({billIds.length})
+                </button>
               )}
             </div>
             {hasActiveFilters && (
@@ -214,20 +252,26 @@ export function LegislasiPage() {
 
         {/* Bill Cards List */}
         {filteredBills.length === 0 ? (
-          <div className="mt-8 elevated-surface p-12 text-center">
-            <FileText className="mx-auto h-9 w-9 text-[#5A6472]" />
-            <h3 className="mt-3 font-editorial text-xl font-bold text-[#14171F]">Tidak ada RUU yang sesuai filter</h3>
-            <p className="mt-1 text-sm text-[#5A6472]">
-              Coba ubah kata kunci pencarian atau reset filter tahapan/pengusul.
-            </p>
-            <button
-              type="button"
-              onClick={clearAllFilters}
-              className="mt-5 rounded-xl bg-gradient-to-r from-[#8D1D29] to-[#5B1219] px-5 py-2.5 text-xs font-bold text-white shadow-md cursor-pointer"
-            >
-              Tampilkan Semua RUU
-            </button>
-          </div>
+          filteredProlegnas.length > 0 && !onlyWatched ? (
+            <div className="mt-8 glass-surface p-6 text-center text-xs sm:text-sm text-[#5A6472]">
+              Pencarian cocok dengan <strong className="text-[#14171F]">{filteredProlegnas.length}</strong> RUU pada daftar <strong className="text-[#7A1822]">Prolegnas Prioritas</strong> di bawah.
+            </div>
+          ) : (
+            <div className="mt-8 elevated-surface p-12 text-center">
+              <FileText className="mx-auto h-9 w-9 text-[#5A6472]" />
+              <h3 className="mt-3 font-editorial text-xl font-bold text-[#14171F]">Tidak ada RUU yang sesuai filter</h3>
+              <p className="mt-1 text-sm text-[#5A6472]">
+                Coba ubah kata kunci pencarian atau reset filter tahapan/pengusul.
+              </p>
+              <button
+                type="button"
+                onClick={clearAllFilters}
+                className="mt-5 rounded-xl bg-gradient-to-r from-[#8D1D29] to-[#5B1219] px-5 py-2.5 text-xs font-bold text-white shadow-md cursor-pointer"
+              >
+                Tampilkan Semua RUU
+              </button>
+            </div>
+          )
         ) : (
           <div className="mt-9 space-y-7">
             {filteredBills.map((bill) => {
@@ -257,9 +301,24 @@ export function LegislasiPage() {
                         {bill.stageStatus}
                       </span>
                     </div>
-                    <span className="font-mono-num text-[#5A6472]">
-                      Pembaruan: <strong className="text-[#14171F]">{bill.lastUpdated}</strong>
-                    </span>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="font-mono-num text-[#5A6472]">
+                        Pembaruan: <strong className="text-[#14171F]">{bill.lastUpdated}</strong>
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => toggleBill(bill.id)}
+                        aria-pressed={isBillWatched(bill.id)}
+                        className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold transition-all cursor-pointer ${
+                          isBillWatched(bill.id)
+                            ? 'bg-[#7A1822] text-white shadow-2xs'
+                            : 'bg-[#F4F1EA] text-[#14171F] hover:bg-[#7A1822]/10 hover:text-[#7A1822]'
+                        }`}
+                      >
+                        <Bookmark className={`h-3 w-3 ${isBillWatched(bill.id) ? 'fill-current' : ''}`} />
+                        {isBillWatched(bill.id) ? 'Dipantau' : 'Pantau'}
+                      </button>
+                    </div>
                   </div>
 
                   <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
@@ -324,6 +383,55 @@ export function LegislasiPage() {
                 </article>
               );
             })}
+          </div>
+        )}
+
+        {/* Expanded Real Prolegnas Prioritas Dataset */}
+        {!onlyWatched && filteredProlegnas.length > 0 && (
+          <div className="mt-14">
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#7A1822]">
+                  <ListChecks className="h-4 w-4" />
+                  Basis Data Prolegnas Prioritas DPR RI
+                </div>
+                <h2 className="mt-1.5 font-editorial text-2xl sm:text-3xl font-bold text-[#14171F]">
+                  RUU Prioritas Lainnya dalam Agenda Pembahasan
+                </h2>
+              </div>
+              <span className="font-mono-num text-xs font-semibold text-[#5A6472]">
+                {filteredProlegnas.length} RUU terindeks
+              </span>
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">
+              {filteredProlegnas.map((item) => (
+                <div key={item.id} className="glass-surface p-6 flex flex-col justify-between">
+                  <div>
+                    <div className="flex flex-wrap items-center justify-between gap-2 text-[11px]">
+                      <span className="font-bold text-[#7A1822]">{item.committee}</span>
+                      <span className="rounded-full bg-[#EFECE4] px-2.5 py-0.5 font-semibold text-[#5A6472]">
+                        {item.statusSummary}
+                      </span>
+                    </div>
+                    <h3 className="mt-2 font-editorial text-xl font-bold text-[#14171F] leading-snug">
+                      {item.shortTitle}
+                    </h3>
+                    <p className="mt-1.5 text-xs text-[#5A6472] leading-relaxed">{item.title}</p>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-[#14171F]/8 flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <span className="text-[#5A6472] font-medium">{item.proposer}</span>
+                    <Link
+                      to={`/akd?q=${encodeURIComponent(item.committee.split('&')[0].trim())}`}
+                      className="inline-flex items-center gap-1 font-bold text-[#7A1822] hover:underline"
+                    >
+                      Lihat AKD Pembahas <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </section>

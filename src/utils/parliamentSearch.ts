@@ -5,11 +5,18 @@ import {
   MEMBERS,
   TODAY_SESSIONS,
 } from '../data/parliamentData';
+import {
+  DAPIL_LIST,
+  FRAKSI_LIST,
+  PROLEGNAS_PRIORITAS,
+} from '../data/referenceData';
 
 export type SearchCategory =
   | 'Panduan & Aksi'
   | 'RUU & UU'
   | 'Anggota'
+  | 'Dapil'
+  | 'Fraksi'
   | 'Komisi & Badan'
   | 'Sidang'
   | 'Risalah';
@@ -439,11 +446,17 @@ const GUIDE_ITEMS: IndexedItem[] = [
 ];
 
 function buildSearchIndex(): IndexedItem[] {
+  const prolegnasByBillId = new Map(
+    PROLEGNAS_PRIORITAS.filter((p) => p.billId).map((p) => [p.billId as string, p]),
+  );
+
   const raw: IndexedItem[] = [
     ...GUIDE_ITEMS,
     ...BILLS.map((bill) => {
+      const extraKeywords = prolegnasByBillId.get(bill.id)?.keywords ?? [];
       const aliases = [
         ...(BILL_ALIASES[bill.id] ?? []),
+        ...extraKeywords,
         'ruu',
         'undang-undang',
         'rancangan',
@@ -461,6 +474,28 @@ function buildSearchIndex(): IndexedItem[] {
         titleLower: `${bill.shortTitle} ${bill.title}`.toLowerCase(),
         subtitleLower: `${bill.committee} ${bill.stageStatus}`.toLowerCase(),
         bodyLower: `${bill.summary} ${bill.committee} ${bill.category}`.toLowerCase(),
+      };
+    }),
+    ...PROLEGNAS_PRIORITAS.filter((p) => !p.billId).map((p) => {
+      const aliases = [
+        ...p.keywords,
+        'prolegnas',
+        'prolegnas prioritas',
+        'ruu',
+        p.proposer,
+        p.committee,
+      ];
+      return {
+        id: `prolegnas-${p.id}`,
+        category: 'RUU & UU' as const,
+        title: p.shortTitle,
+        subtitle: `Prolegnas Prioritas • ${p.committee} • ${p.statusSummary}`,
+        to: `/legislasi?q=${encodeURIComponent(p.shortTitle)}`,
+        aliases,
+        aliasesLower: aliases.map((a) => a.toLowerCase()),
+        titleLower: `${p.shortTitle} ${p.title}`.toLowerCase(),
+        subtitleLower: `prolegnas ${p.committee} ${p.statusSummary}`.toLowerCase(),
+        bodyLower: `${p.title} ${p.proposer} ${p.committee}`.toLowerCase(),
       };
     }),
     ...MEMBERS.map((member) => {
@@ -485,6 +520,57 @@ function buildSearchIndex(): IndexedItem[] {
         titleLower: member.name.toLowerCase(),
         subtitleLower: `${member.faction} ${member.dapil}`.toLowerCase(),
         bodyLower: `${member.role} ${member.bio} ${member.akd.join(' ')}`.toLowerCase(),
+      };
+    }),
+    ...DAPIL_LIST.map((d) => {
+      const regionPreview =
+        d.regions.length > 3
+          ? `${d.regions.slice(0, 3).join(', ')} (+${d.regions.length - 3} wilayah)`
+          : d.regions.join(', ');
+      const aliases = [
+        'dapil',
+        'daerah pemilihan',
+        d.province,
+        d.islandGroup,
+        ...d.regions,
+        ...d.keywords,
+      ];
+      return {
+        id: `dapil-${d.id}`,
+        category: 'Dapil' as const,
+        title: `Dapil ${d.name} (${d.seats} Kursi)`,
+        subtitle: `${d.province} • ${regionPreview}`,
+        to: `/anggota?dapil=${encodeURIComponent(d.name)}`,
+        aliases,
+        aliasesLower: aliases.map((a) => a.toLowerCase()),
+        titleLower: `dapil ${d.name} ${d.province}`.toLowerCase(),
+        subtitleLower: `${d.province} ${d.regions.join(' ')}`.toLowerCase(),
+        bodyLower: `${d.regions.join(' ')} ${d.keywords.join(' ')}`.toLowerCase(),
+      };
+    }),
+    ...FRAKSI_LIST.map((f) => {
+      const displayName = f.name.toLowerCase().includes(f.shortName.toLowerCase())
+        ? f.name
+        : `${f.name} (${f.shortName})`;
+      const aliases = [
+        'fraksi',
+        'partai',
+        'kursi dpr',
+        f.code,
+        f.shortName,
+        ...f.keywords,
+      ];
+      return {
+        id: `fraksi-${f.id}`,
+        category: 'Fraksi' as const,
+        title: `${displayName} (${f.seats} Kursi)`,
+        subtitle: `${f.code} • ${f.sharePct.toString().replace('.', ',')}% kursi DPR RI 2024-2029`,
+        to: `/anggota?fraksi=${encodeURIComponent(f.shortName)}`,
+        aliases,
+        aliasesLower: aliases.map((a) => a.toLowerCase()),
+        titleLower: `${f.name} ${f.shortName} ${f.code}`.toLowerCase(),
+        subtitleLower: `${f.code} ${f.shortName}`.toLowerCase(),
+        bodyLower: `${f.keywords.join(' ')}`.toLowerCase(),
       };
     }),
     ...AKD_LIST.map((akd) => {
