@@ -656,6 +656,7 @@ export interface AspirationTicket {
   submittedAt: string;
   channel: 'Masukan RUU (RDPU)' | 'Aspirasi BAM';
   target: string;
+  dimRef?: string;
   senderName: string;
   organization?: string;
   dapil?: string;
