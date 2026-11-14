@@ -4,6 +4,19 @@
 
 ---
 
+## Pratinjau Tampilan
+
+### Beranda & Pencarian Cepat
+![Beranda Parlemen.id](./docs/screenshots/beranda.png)
+
+### Pelacakan Tahapan RUU & Matriks DIM
+![Detail RUU & Poin Perubahan Pasal (DIM)](./docs/screenshots/detail-ruu-dim.png)
+
+### Jadwal Sidang & TV Parlemen
+![Jadwal Rapat & Siaran TV Parlemen](./docs/screenshots/sidang-tv-parlemen.png)
+
+---
+
 ## Ringkasan Proyek
 
 **Parlemen.id** terinspirasi dari pendekatan keterbukaan informasi *UK Parliament (`parliament.uk`)* dan disesuaikan dengan proses bisnis ketatanegaraan **DPR RI** (UU MD3 & Tata Tertib DPR RI), menggunakan bahasa yang ramah untuk masyarakat awam.

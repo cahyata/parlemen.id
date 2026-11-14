@@ -46,17 +46,17 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/75 backdrop-blur-xl shadow-[0_8px_32px_-8px_rgba(20,23,31,0.08)]">
+    <header className="sticky top-0 z-40 overflow-x-clip bg-white/75 backdrop-blur-xl shadow-[0_8px_32px_-8px_rgba(20,23,31,0.08)]">
       {/* Top Institutional Utility Bar */}
       <div className="bg-senayan-mesh text-white text-xs">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-2 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center gap-2.5">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#C28E0E]/25 px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase text-[#FDE68A]">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-2 sm:px-6 lg:px-8 min-w-0">
+          <div className="flex flex-wrap items-center gap-2 min-w-0 max-w-full">
+            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#C28E0E]/25 px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase text-[#FDE68A]">
               <ShieldCheck className="h-3 w-3 text-[#FDE68A]" />
               DPR RI • 2024–2029
             </span>
             <span className="hidden sm:inline text-white/30">•</span>
-            <span className="text-white/90 font-medium">
+            <span className="text-white/90 font-medium break-words">
               Masa Persidangan II Tahun Sidang 2026–2027
             </span>
           </div>

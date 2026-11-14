@@ -43,7 +43,7 @@ export function HomePage() {
 
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 min-w-0">
               <p className="text-xs font-bold uppercase tracking-widest text-[#7A1822]">
                 Dewan Perwakilan Rakyat Republik Indonesia
               </p>
@@ -105,7 +105,7 @@ export function HomePage() {
             </div>
 
             {/* Right Velvet Snapshot Card */}
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5 min-w-0">
               <div className="velvet-surface relative overflow-hidden text-white">
                 <div className="pointer-events-none absolute -top-14 -right-14 h-44 w-44 rounded-full bg-[#C28E0E]/25 blur-3xl" />
 
@@ -322,7 +322,7 @@ export function HomePage() {
       <section className="relative overflow-hidden bg-gradient-to-b from-white/75 to-[#F7F5F0] py-20">
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Left: RUU Prioritas */}
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-8 min-w-0">
             <div className="flex flex-wrap items-end justify-between gap-2">
               <div>
                 <p className="text-xs font-bold uppercase tracking-widest text-[#7A1822]">
@@ -380,7 +380,7 @@ export function HomePage() {
           </div>
 
           {/* Right: Velvet Dapil Finder */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-4 min-w-0">
             <div className="velvet-surface relative overflow-hidden p-7 sm:p-8 text-white sticky top-28">
               <div className="pointer-events-none absolute -top-20 -right-20 h-56 w-56 rounded-full bg-[#C28E0E]/25 blur-3xl" />
 

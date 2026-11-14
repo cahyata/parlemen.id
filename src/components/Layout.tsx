@@ -61,9 +61,9 @@ export function Layout({ children }: { children: ReactNode }) {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col ambient-page-bg text-[#14171F]">
+    <div className="min-h-screen flex flex-col overflow-x-clip ambient-page-bg text-[#14171F]">
       <Navbar />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 min-w-0">{children}</main>
       <Footer />
     </div>
   );
