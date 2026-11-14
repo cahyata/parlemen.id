@@ -118,7 +118,7 @@ export function SidangPage() {
         breadcrumbs={[{ label: 'Jadwal & Catatan Sidang' }]}
         eyebrow="Transparansi Rapat DPR RI"
         title="Jadwal Rapat, TV Parlemen & Catatan Sidang"
-        description="Ikuti agenda Rapat Paripurna, Rapat Kerja bersama Menteri, dan Rapat Dengar Pendapat Umum (RDPU). Baca juga Risalah—yaitu catatan resmi kata demi kata jalannya rapat beserta keputusan yang diambil."
+        description="Ikuti agenda Rapat Paripurna, Rapat Kerja bersama Menteri, dan Rapat Dengar Pendapat Umum (RDPU). Baca juga Risalah, yaitu catatan resmi kata demi kata jalannya rapat beserta keputusan yang diambil."
         aside={
           <div className="inline-flex rounded-2xl bg-white/80 backdrop-blur-md p-1.5 shadow-[0_8px_24px_-6px_rgba(20,23,31,0.1)]">
             <button

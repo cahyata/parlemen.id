@@ -1,4 +1,4 @@
-# Parlemen.id — Purwarupa Portal Terbuka Parlemen DPR RI
+# Parlemen.id - Purwarupa Portal Terbuka Parlemen DPR RI
 
 > **Catatan / Disclaimer:** Ini adalah **proyek pribadi (purwarupa konsep / non-resmi)** yang dibuat untuk keperluan eksplorasi desain antarmuka, arsitektur informasi parlemen, dan portofolio *civic tech*. Seluruh data RUU, profil anggota, jadwal rapat, risalah, dan pengaduan yang tampil di aplikasi ini bersifat simulasi dan **bukan** situs resmi Dewan Perwakilan Rakyat Republik Indonesia ([dpr.go.id](https://www.dpr.go.id)).
 

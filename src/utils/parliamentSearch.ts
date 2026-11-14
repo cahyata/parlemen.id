@@ -346,7 +346,7 @@ const GUIDE_ITEMS: IndexedItem[] = [
   {
     id: 'guide-partisipasi',
     category: 'Panduan & Aksi',
-    title: 'Suara Warga — Kirim Pengaduan atau Usulan Pasal RUU',
+    title: 'Suara Warga - Kirim Pengaduan atau Usulan Pasal RUU',
     subtitle: 'Saluran resmi masukan publik (BAM) dan permohonan dengar pendapat (RDPU)',
     to: '/partisipasi',
     aliases: [
@@ -498,7 +498,7 @@ function buildSearchIndex(): IndexedItem[] {
       return {
         id: `akd-${akd.id}`,
         category: 'Komisi & Badan' as const,
-        title: `${akd.code} — ${akd.name}`,
+        title: `${akd.code} - ${akd.name}`,
         subtitle: akd.scope,
         to: `/akd?q=${encodeURIComponent(akd.code)}`,
         aliases,
@@ -590,7 +590,7 @@ export const QUICK_SUGGESTIONS: SearchResult[] = [
   {
     id: 'quick-lapor',
     category: 'Panduan & Aksi',
-    title: 'Suara Warga — Kirim Keluhan atau Usulan Pasal',
+    title: 'Suara Warga - Kirim Keluhan atau Usulan Pasal',
     subtitle: 'Pengaduan publik & permohonan Rapat Dengar Pendapat (RDPU)',
     to: '/partisipasi',
     matchedAlias: 'lapor / pengaduan / aspirasi',

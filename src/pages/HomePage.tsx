@@ -486,7 +486,7 @@ export function HomePage() {
               icon: Wallet,
               gradient: 'from-[#C28E0E] to-[#8C6404]',
               title: 'Menetapkan Anggaran Negara',
-              desc: 'Membahas dan menyetujui RUU APBN bersama Presiden—termasuk alokasi belanja kementerian serta transfer anggaran ke daerah.',
+              desc: 'Membahas dan menyetujui RUU APBN bersama Presiden, termasuk alokasi belanja kementerian serta transfer anggaran ke daerah.',
               linkTo: '/legislasi/ruu-apbn-2027',
               linkLabel: 'Lihat UU APBN 2027 →',
             },

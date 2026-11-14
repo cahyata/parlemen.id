@@ -93,7 +93,7 @@ export function Footer() {
 
         <div className="mt-12 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
           <p>
-            © 2026 Parlemen.id — Purwarupa konsep independen (non-resmi) dengan data simulasi. Situs resmi DPR RI:{' '}
+            © 2026 Parlemen.id - Purwarupa konsep independen (non-resmi) dengan data simulasi. Situs resmi DPR RI:{' '}
             <a
               href="https://www.dpr.go.id"
               target="_blank"

@@ -154,7 +154,7 @@ export function PartisipasiPage() {
                   >
                     {openBills.map((b) => (
                       <option key={b.id} value={b.id}>
-                        {b.shortTitle} — {b.committee} ({b.stageStatus})
+                        {b.shortTitle} - {b.committee} ({b.stageStatus})
                       </option>
                     ))}
                   </select>
@@ -172,7 +172,7 @@ export function PartisipasiPage() {
                   >
                     {AKD_LIST.filter((a) => a.category === 'Komisi').map((a) => (
                       <option key={a.id} value={a.code}>
-                        {a.code} — {a.name}
+                        {a.code} - {a.name}
                       </option>
                     ))}
                   </select>

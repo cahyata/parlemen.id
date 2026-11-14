@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 export function NotFoundPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-20 text-center">
-      <p className="text-xs font-bold uppercase tracking-widest text-[#7C1D26]">404 — Halaman Tidak Ditemukan</p>
+      <p className="text-xs font-bold uppercase tracking-widest text-[#7C1D26]">404 - Halaman Tidak Ditemukan</p>
       <h1 className="mt-2 font-editorial text-4xl font-bold text-[#1A1D21]">
         Halaman Portal Tidak Tersedia
       </h1>

@@ -156,7 +156,7 @@ export const BILLS: Bill[] = [
     dimProgress: { total: 148, agreed: 96, pending: 52 },
     dimHighlights: [
       {
-        cluster: 'Bab II — Ruang Lingkup Aset',
+        cluster: 'Bab II - Ruang Lingkup Aset',
         article: 'Pasal 5 ayat (1)',
         issue: 'Batas minimum nilai aset yang dapat diajukan perampasan tanpa pemidanaan',
         dprPosition: 'Mengusulkan batas minimal Rp100 juta atau aset terkait perkara strategis agar proporsional',
@@ -164,7 +164,7 @@ export const BILLS: Bill[] = [
         status: 'Disepakati',
       },
       {
-        cluster: 'Bab IV — Perlindungan Pihak Ketiga',
+        cluster: 'Bab IV - Perlindungan Pihak Ketiga',
         article: 'Pasal 23 ayat (3)',
         issue: 'Batas waktu pengajuan keberatan pihak ketiga yang beritikad baik di pengadilan negeri',
         dprPosition: 'Memperpanjang tenggat keberatan dari 14 hari menjadi 30 hari kerja sejak pengumuman publik',
@@ -172,7 +172,7 @@ export const BILLS: Bill[] = [
         status: 'Dalam Pembahasan Timus',
       },
       {
-        cluster: 'Bab V — Pengelolaan Aset',
+        cluster: 'Bab V - Pengelolaan Aset',
         article: 'Pasal 37',
         issue: 'Audit berkala dan akuntabilitas lembaga pengelola aset sitaan negara',
         dprPosition: 'Wajib diaudit BPK setiap tahun dan dipublikasikan ringkasannya kepada DPR dan publik',
@@ -184,7 +184,7 @@ export const BILLS: Bill[] = [
       { title: 'Naskah Akademik RUU Perampasan Aset Tindak Pidana', type: 'Naskah Akademik', date: '18 Jun 2026', size: '2,4 MB PDF' },
       { title: 'Draf Awal RUU Perampasan Aset (Surpres R-21/Pres/06/2026)', type: 'Draf RUU', date: '18 Jun 2026', size: '1,1 MB PDF' },
       { title: 'Kompilasi DIM Gabungan 8 Fraksi (148 Poin)', type: 'DIM Fraksi', date: '15 Sep 2026', size: '3,8 MB PDF' },
-      { title: 'Risalah Panja Komisi III — Pembahasan Bab I s.d. III', type: 'Risalah Panja', date: '04 Nov 2026', size: '920 KB PDF' },
+      { title: 'Risalah Panja Komisi III - Pembahasan Bab I s.d. III', type: 'Risalah Panja', date: '04 Nov 2026', size: '920 KB PDF' },
     ],
     timeline: [
       { date: '12 Nov 2026', event: 'Rapat Panja Pembahasan DIM Bab IV (Perlindungan Pihak Ketiga)', actor: 'Panja Komisi III & Kemenkum' },
@@ -550,7 +550,7 @@ export const TODAY_SESSIONS: ParliamentarySession[] = [
 export const HANSARD_ENTRIES: HansardEntry[] = [
   {
     id: 'h-1',
-    sessionTitle: 'RDPU Komisi I — RUU Tata Kelola AI',
+    sessionTitle: 'RDPU Komisi I - RUU Tata Kelola AI',
     date: '14 Nov 2026 • 14:15 WIB',
     akd: 'Komisi I',
     speaker: 'Siti Nurhaliza Rahmawati, S.Sos., M.Si.',
@@ -563,7 +563,7 @@ export const HANSARD_ENTRIES: HansardEntry[] = [
   },
   {
     id: 'h-2',
-    sessionTitle: 'Panja RUU Perampasan Aset — Komisi III',
+    sessionTitle: 'Panja RUU Perampasan Aset - Komisi III',
     date: '12 Nov 2026 • 15:40 WIB',
     akd: 'Komisi III',
     speaker: 'Dr. H. Andika Pratama, S.H., M.H.',
@@ -576,7 +576,7 @@ export const HANSARD_ENTRIES: HansardEntry[] = [
   },
   {
     id: 'h-3',
-    sessionTitle: 'Rapat Paripurna ke-9 — Pengesahan RUU PPRT',
+    sessionTitle: 'Rapat Paripurna ke-9 - Pengesahan RUU PPRT',
     date: '10 Nov 2026 • 11:20 WIB',
     akd: 'Paripurna DPR RI',
     speaker: 'Ni Luh Ayu Lestari Kencana, S.E.',
@@ -615,7 +615,7 @@ export const HANSARD_ENTRIES: HansardEntry[] = [
   },
   {
     id: 'h-6',
-    sessionTitle: 'RDPU Komisi I — RUU Tata Kelola AI',
+    sessionTitle: 'RDPU Komisi I - RUU Tata Kelola AI',
     date: '14 Nov 2026 • 14:40 WIB',
     akd: 'Komisi I',
     speaker: 'Dimas Aryo Prakoso, S.I.P., M.Sc.',
