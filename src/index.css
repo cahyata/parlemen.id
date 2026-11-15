@@ -129,3 +129,44 @@
 .gold-accent-bar {
   background: linear-gradient(90deg, #7A1822 0%, #C28E0E 50%, #7A1822 100%);
 }
+
+/* Native top-layer modal dialog & scroll containment */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background: rgba(20, 23, 31, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.search-dialog[open] {
+  margin: 3.5rem auto 2rem;
+  padding: 0;
+  border: 0;
+  width: min(42rem, calc(100vw - 2rem));
+  max-width: 42rem;
+  max-height: calc(100dvh - 5.5rem);
+  background: transparent;
+}
+
+@media (min-width: 640px) {
+  .search-dialog[open] {
+    margin-top: 5rem;
+    max-height: calc(100dvh - 7rem);
+  }
+}
+
+/* Defer offscreen layout/paint for below-the-fold sections & cards */
+.deferred-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto 480px;
+}
+
+.deferred-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto 240px;
+}

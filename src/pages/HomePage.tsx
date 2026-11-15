@@ -399,7 +399,7 @@ export function HomePage() {
       </section>
 
       {/* 3. Hari Ini di Kompleks Parlemen Senayan */}
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10">
+      <section className="deferred-section mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#7A1822]">
@@ -491,7 +491,7 @@ export function HomePage() {
       </section>
 
       {/* 4. Pelacakan RUU Prioritas + Cari Wilayah (Dapil) */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-white/75 to-[#F7F5F0] py-20">
+      <section className="deferred-section relative overflow-hidden bg-gradient-to-b from-white/75 to-[#F7F5F0] py-20">
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Left: RUU Prioritas */}
           <div className="lg:col-span-8 min-w-0">
@@ -632,7 +632,7 @@ export function HomePage() {
       </section>
 
       {/* 5. 3 Fungsi Konstitusional DPR RI */}
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10">
+      <section className="deferred-section mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10">
         <div className="max-w-2xl">
           <p className="text-xs font-bold uppercase tracking-widest text-[#7A1822]">
             Tugas Utama DPR RI (UUD 1945)

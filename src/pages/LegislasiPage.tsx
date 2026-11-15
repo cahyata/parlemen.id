@@ -388,7 +388,7 @@ export function LegislasiPage() {
 
         {/* Expanded Real Prolegnas Prioritas Dataset */}
         {!onlyWatched && filteredProlegnas.length > 0 && (
-          <div className="mt-14">
+          <div className="mt-14 deferred-section">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
                 <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#7A1822]">

@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
@@ -42,23 +41,59 @@ export function GlobalSearchModal({
   initialQuery = '',
 }: GlobalSearchModalProps) {
   const navigate = useNavigate();
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [query, setQuery] = useState(initialQuery);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
     if (open) {
       setQuery(initialQuery);
       setActiveIndex(0);
-      document.body.style.overflow = 'hidden';
+      if (!dialog.open) {
+        dialog.showModal();
+      }
       const timer = setTimeout(() => inputRef.current?.focus(), 20);
-      return () => {
-        clearTimeout(timer);
-        document.body.style.overflow = '';
-      };
+      return () => clearTimeout(timer);
+    }
+
+    if (dialog.open) {
+      dialog.close();
     }
     return undefined;
   }, [open, initialQuery]);
+
+  // Progressive enhancement fallback for browsers without <dialog closedby="any"> (e.g. Safari)
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog || 'closedBy' in HTMLDialogElement.prototype) return undefined;
+
+    const outside = (e: PointerEvent) => {
+      const r = dialog.getBoundingClientRect();
+      return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+    };
+
+    let pressedOutside = false;
+    const onPointerDown = (e: PointerEvent) => {
+      pressedOutside = outside(e);
+    };
+    const onPointerUp = (e: PointerEvent) => {
+      if (pressedOutside && outside(e) && dialog.open) {
+        dialog.close();
+      }
+      pressedOutside = false;
+    };
+
+    dialog.addEventListener('pointerdown', onPointerDown);
+    dialog.addEventListener('pointerup', onPointerUp);
+    return () => {
+      dialog.removeEventListener('pointerdown', onPointerDown);
+      dialog.removeEventListener('pointerup', onPointerUp);
+    };
+  }, []);
 
   const results = useMemo<SearchResult[]>(() => searchParliament(query), [query]);
 
@@ -71,49 +106,36 @@ export function GlobalSearchModal({
     navigate(item.to);
   };
 
-  useEffect(() => {
-    if (!open) return;
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDialogElement>) => {
+    if (e.key === 'ArrowDown' && results.length > 0) {
+      e.preventDefault();
+      setActiveIndex((prev) => (prev + 1) % results.length);
+    } else if (e.key === 'ArrowUp' && results.length > 0) {
+      e.preventDefault();
+      setActiveIndex((prev) => (prev - 1 + results.length) % results.length);
+    } else if (e.key === 'Enter' && results[activeIndex]) {
+      e.preventDefault();
+      handleSelect(results[activeIndex]);
+    }
+  };
 
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        onClose();
-      } else if (e.key === 'ArrowDown' && results.length > 0) {
-        e.preventDefault();
-        setActiveIndex((prev) => (prev + 1) % results.length);
-      } else if (e.key === 'ArrowUp' && results.length > 0) {
-        e.preventDefault();
-        setActiveIndex((prev) => (prev - 1 + results.length) % results.length);
-      } else if (e.key === 'Enter' && results[activeIndex]) {
-        e.preventDefault();
-        handleSelect(results[activeIndex]);
-      }
-    };
-
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  });
-
-  if (!open) return null;
-
-  return createPortal(
-    <div
-      className="fixed inset-0 z-[100] flex items-start justify-center bg-[#14171F]/50 backdrop-blur-sm px-4 pt-14 sm:pt-20 pb-8"
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
+  return (
+    <dialog
+      ref={dialogRef}
+      onClose={onClose}
+      onKeyDown={handleKeyDown}
       aria-label="Pencarian cepat portal DPR RI"
+      className="search-dialog"
+      {...({ closedby: 'any' } as Record<string, string>)}
     >
-      <div
-        className="w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-[0_32px_90px_-16px_rgba(20,23,31,0.38)]"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="w-full overflow-hidden rounded-3xl bg-white shadow-[0_32px_90px_-16px_rgba(20,23,31,0.38)]">
         {/* Search Input Row */}
         <div className="flex items-center gap-3 px-6 py-4 border-b border-[#14171F]/8">
           <Search className="h-5 w-5 shrink-0 text-[#7A1822]" />
           <input
             ref={inputRef}
             type="text"
+            autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Ketik topik sehari-hari (korupsi, bpjs, ojol, notulen, lapor)..."
@@ -237,7 +259,6 @@ export function GlobalSearchModal({
           <span className="hidden sm:inline font-mono-num font-semibold">Ctrl + K</span>
         </div>
       </div>
-    </div>,
-    document.body,
+    </dialog>
   );
 }

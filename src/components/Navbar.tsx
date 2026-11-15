@@ -13,11 +13,40 @@ const NAV_ITEMS = [
   { to: '/partisipasi', label: 'Suara Warga' },
 ];
 
+function formatJakartaDateTime(date: Date): string {
+  const datePart = new Intl.DateTimeFormat('id-ID', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'Asia/Jakarta',
+  }).format(date);
+
+  const timePart = new Intl.DateTimeFormat('id-ID', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'Asia/Jakarta',
+  })
+    .format(date)
+    .replace('.', ':');
+
+  return `${datePart} • ${timePart} WIB • Senayan`;
+}
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchInitialQuery, setSearchInitialQuery] = useState('');
+  const [now, setNow] = useState(() => new Date());
   const liveCount = TODAY_SESSIONS.filter((s) => s.status === 'Berlangsung').length;
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setNow(new Date());
+    }, 15_000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -63,7 +92,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-3">
             <span className="hidden md:inline-flex items-center gap-1.5 font-mono-num text-[11px] text-white/75">
-              Sabtu, 14 Nov 2026 • Senayan
+              {formatJakartaDateTime(now)}
             </span>
             <Link
               to="/sidang?live=active"

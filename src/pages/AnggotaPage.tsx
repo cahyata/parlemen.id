@@ -354,12 +354,12 @@ export function AnggotaPage() {
         ) : (
           <>
             <div className="mt-7 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {pagedMembers.map((member) => {
+              {pagedMembers.map((member, idx) => {
                 const watched = isMemberWatched(member.id);
                 return (
                   <article
                     key={member.id}
-                    className="elevated-surface-interactive relative overflow-hidden flex flex-col justify-between"
+                    className={`elevated-surface-interactive relative overflow-hidden flex flex-col justify-between ${idx >= 6 ? 'deferred-card' : ''}`}
                   >
                     <div
                       className="pointer-events-none absolute -top-16 -right-12 h-32 w-32 rounded-full opacity-12 blur-2xl"
